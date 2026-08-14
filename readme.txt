@@ -1,7 +1,7 @@
 instalar librerias
 
 
-
+Para todos los comandos de github lo realizaremos en una consola BASH, se abre desde la terminal de visual code, arriba a la derecha alado del mas, bajamos el menu y seleccionamos bash. esto es mejor porque son comandos de linux y funcionan todos los comandos de BASH
 
 1. Conceptos básicos
 Repositorio: donde está guardado todo el código del proyecto.

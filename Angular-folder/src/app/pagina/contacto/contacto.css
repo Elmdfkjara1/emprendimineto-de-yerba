@@ -1,0 +1,110 @@
+h1, p, label, input, textarea, button {
+    font-family: "Mooli", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+/* Tarjeta blanca que envuelve todo el formulario, centrada con margen automático */
+.form-container {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 40px 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Título principal del formulario */
+.form-container h1 {
+  font-size: 24px;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+/* Texto descriptivo debajo del título */
+.form-container p {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 28px;
+}
+
+/* Cada bloque label + input/textarea + posible mensaje de error */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+/* Estilo base compartido por inputs y textarea */
+input,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: inherit;
+  box-sizing: border-box; /* evita que el padding sume ancho extra por fuera del 100% */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Resalta el campo activo: borde azul + halo suave alrededor */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* El textarea puede agrandarse verticalmente pero no achicarse demasiado */
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Mensaje de error que aparece bajo un campo inválido (controlado desde el .html con @if) */
+.error {
+  display: block;
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+}
+
+/* Botón de envío */
+button {
+  width: 100%;
+  padding: 13px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+/* Hover solo si el botón NO está deshabilitado (formulario inválido) */
+button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+/* Estado deshabilitado: se atenúa y cambia el cursor para indicar que no se puede clickear */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensaje de confirmación que aparece tras un envío exitoso */
+.mensaje-estado {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #16a34a;
+}

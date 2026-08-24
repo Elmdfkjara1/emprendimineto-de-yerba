@@ -1,1 +1,77 @@
-<p>contacto works!</p>
+<!-- Contenedor principal de la tarjeta del formulario -->
+<div class="form-container">
+  <h1>Contactanos</h1>
+  <p>Completa el formulario y te responderemos a la brevedad.</p>
+
+  <!-- (submit) escucha el evento nativo del <form> y llama a enviarFormulario() del .ts -->
+  <form (submit)="enviarFormulario($event)">
+
+    <div class="form-group">
+      <label for="nombre">Nombre completo</label>
+      <input
+        type="text"
+        id="nombre"
+        placeholder="Tu nombre"
+        [formField]="contactForm.nombre"
+      >
+      <!-- 
+        contactForm.nombre() lee el estado del campo como signal.
+        .touched() = true si el usuario ya interactuó con el campo (blur, escribió, etc).
+        .invalid() = true si no pasa las validaciones definidas en el .ts.
+        Solo mostramos el error si YA fue tocado, para no asustar al usuario apenas carga la página.
+      -->
+      @if (contactForm.nombre().touched() && contactForm.nombre().invalid()) {
+        <span class="error">Ingresá tu nombre.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="tucorreo@ejemplo.com"
+        [formField]="contactForm.email"
+      >
+      @if (contactForm.email().touched() && contactForm.email().invalid()) {
+        <span class="error">Ingresá un correo válido.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="asunto">Asunto</label>
+      <input
+        type="text"
+        id="asunto"
+        placeholder="Motivo del mensaje"
+        [formField]="contactForm.asunto"
+      >
+      @if (contactForm.asunto().touched() && contactForm.asunto().invalid()) {
+        <span class="error">Ingresá un asunto.</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="mensaje">Mensaje</label>
+      <textarea
+        id="mensaje"
+        placeholder="Escribí tu mensaje aquí..."
+        [formField]="contactForm.mensaje"
+      ></textarea>
+      @if (contactForm.mensaje().touched() && contactForm.mensaje().invalid()) {
+        <span class="error">Escribí tu mensaje.</span>
+      }
+    </div>
+
+    <!-- 
+      contactForm() (con paréntesis) lee el estado global del formulario.
+      Si hay algún campo inválido, el botón se deshabilita para evitar envíos incompletos.
+    -->
+    <button type="submit" [disabled]="contactForm().invalid()">Enviar mensaje</button>
+
+    <!-- enviado() es el signal booleano del .ts: solo se muestra el mensaje si el envío fue exitoso -->
+    @if (enviado()) {
+      <p class="mensaje-estado">¡Gracias! Tu mensaje fue enviado correctamente.</p>
+    }
+  </form>
+</div>

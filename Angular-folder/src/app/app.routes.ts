@@ -6,6 +6,7 @@ import { Footer } from './compartidos/footer/footer';
 import { Navbar } from './compartidos/navbar/navbar';
 import { Carrito } from './compartidos/carrito/carrito';
 import { InicioSesion } from './auth/inicio-sesion/inicio-sesion';
+import { Registro } from './auth/registro/registro';
 
 export const routes: Routes = [
 {path: '', redirectTo: 'inicio', pathMatch: 'full'}, 
@@ -15,7 +16,8 @@ export const routes: Routes = [
 {path: 'footer', component: Footer}, 
 {path: 'navbar', component: Navbar}, 
 {path: 'carrito', component: Carrito}, 
-{path: 'iniciosesion', component: InicioSesion}, 
+{path: 'inicioSesion', component: InicioSesion}, 
+{path: 'registro', component: Registro}
 ];
 
 

@@ -1,0 +1,102 @@
+section {
+	background-color: #a4774e;
+	width: calc(100% - 32px);
+	max-width: 480px;
+	margin: 40px auto;
+	padding: 40px 32px;
+	border-radius: 10px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+	box-sizing: border-box;
+}
+
+h1,
+label,
+input,
+button {
+	font-family: "Mooli", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+h1 {
+	font-size: 24px;
+	color: #1a1a1a;
+	margin: 0 0 28px;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto 28px;
+}
+
+form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+form > div {
+	flex: 0 0 100%;
+}
+
+label {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333333;
+	margin-bottom: 6px;
+}
+
+input {
+	width: 100%;
+	padding: 12px 14px;
+	font-size: 14px;
+    background-color: #483528;  
+    color: #ffffff;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	box-sizing: border-box;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+	outline: none;
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+button {
+	flex: 1 1 calc(50% - 6px);
+	width: auto;
+	padding: 13px;
+	background-color: #6d8a3e;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 600;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: background-color 0.2s, opacity 0.2s;
+}
+
+button:hover {
+	background-color: #5a7234;
+}
+
+button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+	section {
+		margin: 24px auto;
+		padding: 32px 24px;
+	}
+
+	button {
+		flex-basis: 100%;
+	}
+}

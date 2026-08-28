@@ -1,0 +1,47 @@
+Cómo usar git-main.ps1
+
+Este script hace todo el flujo de git por ustedes: guarda sus cambios, actualiza main, mergea su rama, sube todo a GitHub y los devuelve a su rama. Sigan los pasos en orden y no debería fallar nada.
+
+1. Guardar el script
+
+Descarguen git-main.ps1 y pónganlo dentro de la carpeta pasantias (la que tiene Angular-folder, backend, etc. — donde está la carpeta oculta .git).
+
+2. Abrir PowerShell ahí
+Abran el explorador de Windows, entren a la carpeta pasantias.
+Clic derecho dentro de la carpeta → "Abrir en Terminal" (o "Abrir ventana de PowerShell aquí").
+
+⚠️ Tiene que ser PowerShell, no Git Bash ni CMD. Si la ventana dice algo como PS C:\... arriba, están bien.
+
+3. Configuración de primera vez (solo una vez por compu)
+
+Corran estos dos comandos, uno por uno, apretando Enter después de cada uno:
+
+powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+Si pregunta algo, respondan S y Enter.
+
+powershell
+Unblock-File .\git-main.ps1
+
+Esto es porque Windows bloquea por seguridad los scripts que se descargan de internet. Con esto los "desbloqueás" en tu compu.
+
+4. Ejecutar el script
+
+Cada vez que quieran subir sus cambios:
+
+powershell
+.\git-main.ps1
+
+Y sigan las instrucciones que les va pidiendo (les va a preguntar si quieren commitear los cambios y el mensaje del commit).
+
+Si algo falla
+"No está firmado digitalmente" → les faltó el paso 3 (Unblock-File).
+"No se puede cargar el archivo... scripts deshabilitados" → les faltó el otro paso 3 (Set-ExecutionPolicy).
+El merge falla por conflictos → el script les va a avisar y quedan en la rama main sin terminar el merge. Ahí avisen en el grupo antes de tocar nada más.
+No saben en qué carpeta están → corran pwd, les muestra la ruta actual.
+Qué hace exactamente
+
+su_rama → main → pull de main → merge de su_rama en main → push de main → vuelve a su_rama
+
+Así siempre suben a main con lo último del repo ya actualizado.

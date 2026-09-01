@@ -1,10 +1,11 @@
-  import { Component, Injectable } from '@angular/core';
-import { Producto } from './../../interfaz/producto';
+import { Component, Injectable } from '@angular/core';
 import { Carrito } from './../../servicios/carrito';
+import { Producto } from '../../interfaz/productoInterfaz';
 
 @Component({
   selector: 'app-producto',
-  imports: [ Carrito ],
+  imports: [],
+  standalone:true,
   templateUrl: './producto.html',
   styleUrl: './producto.css',
 })

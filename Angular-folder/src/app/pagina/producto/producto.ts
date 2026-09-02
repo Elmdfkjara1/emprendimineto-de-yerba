@@ -1,10 +1,11 @@
-  import { Component, Injectable } from '@angular/core';
-import { Producto } from './../../interfaz/productoInterfaz';
+import { Component, Injectable } from '@angular/core';
 import { Carrito } from './../../servicios/carrito';
+import { Producto } from '../../interfaz/productoInterfaz';
 
 @Component({
   selector: 'app-producto',
-  imports: [ Carrito ],
+  imports: [],
+  standalone:true,
   templateUrl: './producto.html',
   styleUrl: './producto.css',
 })
@@ -31,8 +32,7 @@ export class Productos {
   static id: any;
 
   //constructor(private carrito: Carrito) {}
-
-  //AgregarCarrito(producto: Producto) {
-    //this.carrito.agregarAlCarrito(producto);
-  //}
+ //AgregarCarrito(producto: Producto) {
+ //   this.carrito.agregarAlCarrito(producto);
+ // }
 }

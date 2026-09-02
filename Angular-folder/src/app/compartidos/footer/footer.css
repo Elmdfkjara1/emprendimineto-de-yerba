@@ -1,0 +1,91 @@
+.footer-ojas {
+  background-color: #c8bf9d;
+  color: #3d3d2f;
+  padding: 40px 30px 20px;
+}
+
+.footer-ojas-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-ojas-brand {
+  max-width: 220px;
+}
+
+.footer-ojas-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3d3d2f;
+  text-decoration: none;
+}
+
+.footer-ojas-tagline {
+  font-size: 0.8rem;
+  color: #55523f;
+  margin-top: 8px;
+}
+
+.footer-ojas-titulo {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.footer-ojas-links,
+.footer-ojas-redes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-ojas-links li {
+  margin-bottom: 8px;
+}
+
+.footer-ojas-links a {
+  color: #3d3d2f;
+  text-decoration: none;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease;
+}
+
+.footer-ojas-links a:hover {
+  opacity: 0.6;
+}
+
+.footer-ojas-redes {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-ojas-redes a {
+  color: #3d3d2f;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.footer-ojas-redes a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.footer-ojas-bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #55523f;
+}

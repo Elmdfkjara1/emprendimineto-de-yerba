@@ -1,5 +1,5 @@
   import { Component, Injectable } from '@angular/core';
-import { Producto } from './../../interfaz/producto';
+import { Producto } from './../../interfaz/productoInterfaz';
 import { Carrito } from './../../servicios/carrito';
 
 @Component({

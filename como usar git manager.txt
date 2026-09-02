@@ -31,7 +31,7 @@ Esto es porque Windows bloquea por seguridad los scripts que se descargan de int
 Cada vez que quieran subir sus cambios:
 
 powershell
-.\git-main.ps1
+.\git-main.ps1.
 
 Y sigan las instrucciones que les va pidiendo (les va a preguntar si quieren commitear los cambios y el mensaje del commit).
 

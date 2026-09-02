@@ -1,5 +1,5 @@
   import { Component, Injectable } from '@angular/core';
-import { Producto } from './../../interfaz/producto';
+import { Producto } from './../../interfaz/productoInterfaz';
 import { Carrito } from './../../servicios/carrito';
 
 @Component({
@@ -30,9 +30,9 @@ export class Productos {
   ];
   static id: any;
 
-  constructor(private carrito: Carrito) {}
+  //constructor(private carrito: Carrito) {}
 
-  AgregarCarrito(producto: Producto) {
-    this.carrito.agregarAlCarrito(producto);
-  }
+  //AgregarCarrito(producto: Producto) {
+    //this.carrito.agregarAlCarrito(producto);
+  //}
 }

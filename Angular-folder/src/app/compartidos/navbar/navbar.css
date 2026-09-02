@@ -1,0 +1,41 @@
+/* fondo general del navbar */
+.navbar-ojas {
+  background-color: #c8bf9d;
+  padding: 10px 30px;
+}
+
+/* alineación y separación de los items */
+.navbar-ojas .navbar-nav {
+  align-items: center;
+}
+
+.navbar-ojas .nav-item {
+  margin-left: 10px;
+}
+
+/* estilo base de los links (Productos, Contacto) */
+.navbar-ojas .nav-link {
+  color: #3d3d2f;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 50px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-ojas .nav-link:hover,
+.navbar-ojas .nav-link:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* botón "Inicio de Sesion" */
+.btn-sesion {
+  background-color: #2b2b22;
+  color: #fff !important;
+  padding: 8px 20px;
+}
+
+.btn-sesion:hover {
+  background-color: #46453a;
+}

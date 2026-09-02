@@ -11,7 +11,7 @@ import { Productos } from './pagina/producto/producto';
 export const routes: Routes = [
 {path: '', redirectTo: 'inicio', pathMatch: 'full'}, 
 {path : 'inicio', component: Inicio}, 
-{path : 'productos', component: Productos},
+{path : 'producto', component: Productos},
 {path: 'contacto', component: Contacto}, 
 {path: 'footer', component: Footer}, 
 {path: 'navbar', component: Navbar}, 
@@ -19,5 +19,3 @@ export const routes: Routes = [
 {path: 'inicioSesion', component: InicioSesion}, 
 {path: 'registro', component: Registro}
 ];
-
-

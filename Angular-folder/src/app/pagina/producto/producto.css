@@ -1,0 +1,181 @@
+:host {
+  --color-arena: #c8c09a;
+  --color-verde-claro: #a0bf75;
+  --color-verde: #6d8a3e;
+  --color-marron: #725530;
+  --color-tierra: #772f13;
+  display: block;
+}
+
+.producto-seccion {
+  background: linear-gradient(180deg, var(--color-arena) 0%, #ffffff 55%);
+}
+
+/* ---------- Hueco de imagen (ancho y alto definidos) ---------- */
+.producto-img-hueco {
+  width: 100%;
+  max-width: 460px;
+  height: 460px; /* alto fijo en desktop */
+  background-color: var(--color-arena);
+  overflow: hidden;
+  position: relative;
+  border: 6px solid #ffffff;
+}
+
+.producto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .producto-img-hueco {
+    height: 380px;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .producto-img-hueco {
+    height: 300px;
+    max-width: 100%;
+  }
+}
+
+/* ---------- Badges ambiente ---------- */
+.badge-ambiente {
+  background-color: var(--color-verde);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+}
+
+/* ---------- Textos ---------- */
+.eyebrow {
+  color: var(--color-tierra);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+}
+
+.producto-titulo {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--color-marron);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.producto-descripcion {
+  color: #4a4132;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 40rem;
+}
+
+.producto-precio {
+  color: var(--color-tierra);
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+/* ---------- Selector de variante ---------- */
+.btn-variante {
+  border: 2px solid var(--color-marron);
+  background-color: #ffffff;
+  color: var(--color-marron);
+  border-radius: 0.75rem;
+  padding: 0.55rem 1.1rem;
+  min-width: 7.5rem;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-variante:hover {
+  transform: translateY(-2px);
+}
+
+.btn-variante.activa {
+  background-color: var(--color-verde);
+  border-color: var(--color-verde);
+  color: #ffffff;
+}
+
+/* ---------- Selector de cantidad ---------- */
+.selector-cantidad {
+  border: 1px solid var(--color-arena);
+  border-radius: 0.6rem;
+  overflow: hidden;
+}
+
+.btn-cantidad {
+  background-color: var(--color-arena);
+  color: var(--color-marron);
+  border: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.btn-cantidad:disabled {
+  opacity: 0.4;
+}
+
+.cantidad-valor {
+  min-width: 2.4rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Stock ---------- */
+.stock-info {
+  color: var(--color-verde);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.stock-info.stock-bajo {
+  color: var(--color-tierra);
+}
+
+/* ---------- Botones de acción ---------- */
+.btn-comprar {
+  background-color: var(--color-tierra);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-comprar:hover:not(:disabled) {
+  background-color: #5c2510;
+  transform: translateY(-2px);
+}
+
+.btn-comprar:disabled {
+  background-color: #b8a89a;
+  cursor: not-allowed;
+}
+
+.btn-consultar {
+  background-color: transparent;
+  color: var(--color-marron);
+  border: 2px solid var(--color-marron);
+  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 0.85rem 1.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-consultar:hover {
+  background-color: var(--color-marron);
+  color: #ffffff;
+}

@@ -22,8 +22,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public",
-                "output":"assets"
+                "input": "public/assets",
+                "output":"/assets"
               }
             ],
             "styles": [

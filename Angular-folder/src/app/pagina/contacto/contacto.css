@@ -1,30 +1,52 @@
-h1, p, label, input, textarea, button {
-    font-family: "Mooli", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+/* Colores de la paleta del proyecto: se definen una vez y se usan abajo con var() */
+:host { /* :host apunta al componente principal, es decir a app-contacto */ 
+ --beige: #C8C09A;
+  --verde: #6D8A3E;
+  --marron: #725530;
+  --marron-rojizo: #772F13;
+
+  display: flex;             
+  flex-wrap: wrap;           /* si no entran, la segunda baja (celular) */
+  justify-content: center;  
+  align-items: flex-start;   /* cada tarjeta mide lo que necesita de alto */
+  gap: 24px;                 /* separación entre las dos */
+  padding: 0 16px;           /* margen a los costados en pantallas chicas */
 }
-/* Tarjeta blanca que envuelve todo el formulario, centrada con margen automático */
-.form-container {
+
+/* Tarjeta blanca compartida por el formulario y las preguntas frecuentes */
+.form-container,
+.faq-container {
   background-color: #ffffff;
-  width: 100%;
+  flex: 1 1 320px;           /* crecen o se achican, pero no bajan de 320px */
   max-width: 480px;
-  margin: 40px auto;
+  margin: 40px 0;            /* antes: 40px auto */
   padding: 40px 32px;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  font-family: "Cormorant Garamond", serif;
 }
 
-/* Título principal del formulario */
-.form-container h1 {
-  font-size: 24px;
-  color: #1a1a1a;
+/* Inputs y botones no heredan la fuente solos: hay que pedírselo */
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+/* Títulos de las dos tarjetas */
+.form-container h1,
+.faq-container h2 {
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--marron);
   margin: 0 0 8px;
 }
 
-/* Texto descriptivo debajo del título */
-.form-container p {
-  font-size: 14px;
-  color: #666;
+/* Texto debajo del título (">" = solo el párrafo directo, no el mensaje de estado) */
+.form-container > p {
+  font-size: 16px;
+  color: #555;
   margin: 0 0 28px;
 }
 
@@ -35,9 +57,9 @@ h1, p, label, input, textarea, button {
 
 label {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: var(--marron);
   margin-bottom: 6px;
 }
 
@@ -46,33 +68,31 @@ input,
 textarea {
   width: 100%;
   padding: 12px 14px;
-  font-size: 14px;
-  border: 1px solid #d1d5db;
+  font-size: 16px; /* 16px evita el zoom automático en iPhone */
+  border: 1px solid var(--beige);
   border-radius: 6px;
-  font-family: inherit;
-  box-sizing: border-box; /* evita que el padding sume ancho extra por fuera del 100% */
+  box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Resalta el campo activo: borde azul + halo suave alrededor */
+/* Campo activo: borde verde + halo suave */
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px rgba(109, 138, 62, 0.2);
 }
 
-/* El textarea puede agrandarse verticalmente pero no achicarse demasiado */
 textarea {
   resize: vertical;
   min-height: 120px;
 }
 
-/* Mensaje de error que aparece bajo un campo inválido (controlado desde el .html con @if) */
+/* Mensaje de error bajo un campo inválido (se controla desde el .html con @if) */
 .error {
   display: block;
-  font-size: 12px;
-  color: #dc2626;
+  font-size: 14px;
+  color: var(--marron-rojizo);
   margin-top: 4px;
 }
 
@@ -80,9 +100,9 @@ textarea {
 button {
   width: 100%;
   padding: 13px;
-  background-color: #2563eb;
+  background-color: var(--marron);
   color: #ffffff;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   border: none;
   border-radius: 6px;
@@ -90,21 +110,40 @@ button {
   transition: background-color 0.2s, opacity 0.2s;
 }
 
-/* Hover solo si el botón NO está deshabilitado (formulario inválido) */
+/* Hover solo si el botón NO está deshabilitado */
 button:hover:not(:disabled) {
-  background-color: #1d4ed8;
+  background-color: var(--marron-rojizo);
 }
 
-/* Estado deshabilitado: se atenúa y cambia el cursor para indicar que no se puede clickear */
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Mensaje de confirmación que aparece tras un envío exitoso */
+/* Mensaje de confirmación tras un envío exitoso */
 .mensaje-estado {
   margin-top: 16px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
   text-align: center;
-  color: #16a34a;
+  color: var(--verde);
+}
+
+/* Preguntas frecuentes */
+.faq-container details {
+  border-bottom: 1px solid var(--beige);
+  padding: 0.75rem 0;
+}
+
+.faq-container summary {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--marron);
+}
+
+.faq-container p {
+  margin: 0.5rem 0 0;
+  font-size: 16px;
+  color: #555;
 }

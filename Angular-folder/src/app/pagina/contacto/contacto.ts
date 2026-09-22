@@ -26,7 +26,7 @@ export class Contacto {
     required(campos.mensaje);
   });
 
-  // 3) ¿Ya se envió? Controla el mensaje de "¡Gracias!" del HTML
+  // 3) Controla el mensaje de "¡Gracias!" del HTML
   enviado = signal(false);
 
   enviarFormulario(event: Event) {

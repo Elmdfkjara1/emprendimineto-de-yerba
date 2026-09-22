@@ -14,4 +14,23 @@ export class Registro {
   private authService: AuthService
  ) {}
   
+
+ agregarUsuario(nombre: string, mail: string, password: string, rol: string): void {
+
+  if (!nombre || !mail || !password || !rol) {
+    console.log('Todos los campos son obligatorios');
+    return;
+  }
+    const nuevoUsuario = {
+      id: this.authService.obtenerUsuario().length + 1,
+      nombre: nombre,
+      mail: mail,
+      password: password,
+      rol: rol
+    };
+    this.authService.agregarUsuario(nuevoUsuario);
+  }
+
+  
+
 }

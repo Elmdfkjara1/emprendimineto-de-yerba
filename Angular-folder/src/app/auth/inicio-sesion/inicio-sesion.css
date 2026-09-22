@@ -24,6 +24,11 @@ h1 {
 	margin: 0 0 28px;
 }
 
+a{
+	text-decoration: none;
+	color: #483528;
+}
+
 img {
 	display: block;
 	max-width: 100%;
@@ -53,7 +58,7 @@ input {
 	width: 100%;
 	padding: 12px 14px;
 	font-size: 14px;
-    background-color: #483528;  
+    background-color: #765640;  
     color: #ffffff;
 	border: 1px solid #d1d5db;
 	border-radius: 6px;

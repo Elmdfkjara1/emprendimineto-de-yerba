@@ -9,14 +9,16 @@ export class ExpProductos {
     {
       id: 1,
       nombre: 'Yerba Mate ojas 1kg',
-      precio: 3450.0,
+      precio: 10000,
       imagen: 'assets/img/yerba.jpg',
+      peso: 1,
     },
     {
       id: 2,
-      nombre: 'Yerba Mate ojas 500g',
-      precio: 1800.0,
+      nombre: 'Yerba Mate ojas 2kg',
+      precio: 15000,
       imagen: 'assets/img/yerba.jpg',
+      peso: 2,
     },
   ]
 

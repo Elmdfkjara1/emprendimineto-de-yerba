@@ -1,0 +1,161 @@
+:host {
+	--color-arena: #c8c09a;
+	--color-verde: #6d8a3e;
+	--color-marron: #725530;
+	--color-tierra: #772f13;
+	--color-texto: #4a4132;
+	display: block;
+	min-height: 70vh;
+	padding: 3rem 1rem;
+	background: linear-gradient(180deg, var(--color-arena) 0%, #ffffff 65%);
+}
+
+.carrito-container {
+	width: min(100%, 1100px);
+	margin: 0 auto;
+}
+
+.carrito-container h2 {
+	margin: 0 0 1.75rem;
+	color: var(--color-marron);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(2rem, 4vw, 2.8rem);
+	font-weight: 700;
+}
+
+.tabla-carrito {
+	width: 100%;
+	overflow: hidden;
+	border: 6px solid #ffffff;
+	border-spacing: 0;
+	border-radius: 1rem;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 0.75rem 2rem rgba(114, 85, 48, 0.14);
+	color: var(--color-texto);
+}
+
+.tabla-carrito th,
+.tabla-carrito td {
+	padding: 1rem 1.1rem;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tabla-carrito thead {
+	background: var(--color-verde);
+	color: #ffffff;
+}
+
+.tabla-carrito thead th {
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.tabla-carrito tbody tr {
+	border-bottom: 1px solid rgba(200, 192, 154, 0.65);
+}
+
+.tabla-carrito tbody tr:last-child {
+	border-bottom: 0;
+}
+
+.tabla-carrito tbody td:first-child {
+	color: var(--color-marron);
+	font-weight: 700;
+}
+
+.tabla-carrito tfoot {
+	background: #f7f5eb;
+	color: var(--color-marron);
+}
+
+.tabla-carrito tfoot th:last-child {
+	color: var(--color-tierra);
+	font-size: 1.25rem;
+	text-align: right;
+}
+
+.tabla-carrito button {
+	border: 2px solid var(--color-marron);
+	border-radius: 0.65rem;
+	padding: 0.5rem 0.8rem;
+	background: transparent;
+	color: var(--color-marron);
+	font-weight: 600;
+	transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.tabla-carrito button:hover,
+.tabla-carrito button:focus-visible {
+	background: var(--color-marron);
+	color: #ffffff;
+	transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+	:host {
+		padding: 2rem 0.75rem;
+	}
+
+	.tabla-carrito {
+		border-width: 4px;
+	}
+
+	.tabla-carrito thead {
+		display: none;
+	}
+
+	.tabla-carrito,
+	.tabla-carrito tbody,
+	.tabla-carrito tr,
+	.tabla-carrito td {
+		display: block;
+		width: 100%;
+	}
+
+	.tabla-carrito tbody tr {
+		padding: 0.75rem 0;
+	}
+
+	.tabla-carrito tbody td {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.65rem 0.9rem;
+		text-align: right;
+	}
+
+	.tabla-carrito tbody td::before {
+		color: var(--color-marron);
+		content: attr(data-label);
+		font-weight: 700;
+		text-align: left;
+	}
+
+	.tabla-carrito tbody td:first-child {
+		display: block;
+		padding-bottom: 0.35rem;
+		text-align: left;
+	}
+
+	.tabla-carrito tbody td:first-child::before {
+		display: none;
+	}
+
+	.tabla-carrito tfoot tr {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.5rem 0.9rem;
+	}
+
+	.tabla-carrito tfoot th {
+		padding: 0.65rem 0;
+	}
+
+	.tabla-carrito tfoot th:last-child {
+		text-align: right;
+	}
+}

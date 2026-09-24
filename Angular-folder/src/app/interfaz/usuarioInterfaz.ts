@@ -3,6 +3,6 @@ export interface Usuario {
     nombre: string;
     mail: string;
     password: string;
-    rol: string;
+    admin: boolean;
     
 }

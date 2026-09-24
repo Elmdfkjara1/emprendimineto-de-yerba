@@ -11,7 +11,7 @@ import { AuthService } from '../../servicios/auth';
 })
 export class Registro {
  constructor(
-  private authService: AuthService
+private authService: AuthService
  ) {}
   
 
@@ -24,9 +24,9 @@ export class Registro {
     const nuevoUsuario = {
       id: this.authService.obtenerUsuario().length + 1,
       nombre: nombre,
-      mail: mail,
+      mail: mail, 
       password: password,
-      rol: rol
+      admin: true
     };
     this.authService.agregarUsuario(nuevoUsuario);
   }

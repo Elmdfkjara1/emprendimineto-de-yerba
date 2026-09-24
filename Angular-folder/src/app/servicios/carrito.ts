@@ -5,28 +5,28 @@ import { Producto } from '../interfaz/productoInterfaz';
 @Injectable({
   providedIn: 'root',
 })
-export class Carrito {
+export class CarritoService {
 
-  array: Producto[] = [];
+  carrito: Producto[] = [];
 
   // READ - Obtener productos del carrito
   obtenerCarrito(): Producto[] {
-    return this.array;
+    return this.carrito;
   }
 
   // CREATE - Agregar producto al carrito
   agregarAlCarrito(producto: Producto): void {
-    this.array.push(producto);
+    this.carrito.push(producto);
   }
 
   // DELETE - Eliminar producto por ID
   eliminarDelCarrito(id: number): void {
-    this.array = this.array.filter(producto => producto.id !== id);
+    this.carrito = this.carrito.filter(producto => producto.id !== id);
   }
 
   // DELETE - Vaciar carrito
   vaciarCarrito(): void {
-    this.array = [];
+    this.carrito = [];
   }
 
 }

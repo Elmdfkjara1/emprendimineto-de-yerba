@@ -19,5 +19,3 @@ export const routes: Routes = [
 {path: 'inicioSesion', component: InicioSesion}, 
 {path: 'registro', component: Registro}
 ];
-
-

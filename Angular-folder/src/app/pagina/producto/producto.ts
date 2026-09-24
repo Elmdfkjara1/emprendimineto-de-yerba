@@ -31,9 +31,8 @@ export class Productos {
   ];
   static id: any;
 
-  constructor(private carrito: Carrito) {}
-
-  AgregarCarrito(producto: Producto) {
-    this.carrito.agregarAlCarrito(producto);
-  }
+  //constructor(private carrito: Carrito) {}
+ //AgregarCarrito(producto: Producto) {
+ //   this.carrito.agregarAlCarrito(producto);
+ // }
 }

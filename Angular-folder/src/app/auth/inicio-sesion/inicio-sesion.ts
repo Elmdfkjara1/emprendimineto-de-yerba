@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './inicio-sesion.html',
   styleUrl: './inicio-sesion.css',
 })
-export class InicioSesion {
+export class InicioSesion {}
 
-}
 

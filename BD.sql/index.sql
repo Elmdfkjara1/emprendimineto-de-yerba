@@ -10,7 +10,7 @@ create table clientes(
     telefono varchar(15) not null,  
     direccion varchar(100) not null,
     email varchar(50) not null,
-    rol varchar(20) not null,
+    rol boolean not null,
     contraseña VARCHAR(255)
 )
 CREATE TABLE productos (

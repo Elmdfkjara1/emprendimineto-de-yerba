@@ -3,3 +3,10 @@
     font-weight: 400;
     font-style: normal;
 }
+
+.cormorant-garamond-font {
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 350; /* <weight>: Usen valores del 300 al 700 */
+  font-style: normal;
+}

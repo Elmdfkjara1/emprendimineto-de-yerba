@@ -20,10 +20,10 @@
         <tr>
           <td>{{ p.nombre }}</td>
           <td>${{ p.precio }}</td>
-          <td>1</td>
-          <td>${{ p.precio }}</td>
+          <td>{{ p.cantidad ?? 1 }}</td>
+          <td>${{ p.precio * (p.cantidad ?? 1) }}</td>
           <td>
-            <button type="button" (click)="eliminarDelCarrito(p.id)">Eliminar</button>
+            <button type="button" (click)="eliminarDelCarrito($index)">Eliminar</button>
           </td>
         </tr>
       } @empty {
@@ -42,3 +42,10 @@
       </tr>
     </tfoot>
   </table>
+
+
+<!-- 
+  en esta seccion va a ir el boton para finalizar compra 
+   y enviarla a la base de datos como un pedido el cual octavio 
+   va a poder visualizarlo en el componente de pedidos
+ -->

@@ -19,11 +19,14 @@ export class Carrito implements OnInit {
   }
   
   get precioTotal(): number {
-    return this.productosCarrito.reduce((total, producto) => total + producto.precio, 0);
+    return this.productosCarrito.reduce(
+      (total, producto) => total + producto.precio * (producto.cantidad ?? 1),
+      0,
+    );
   }
   
-  eliminarDelCarrito(id: number) {
-    this.carrito.eliminarDelCarrito(id);
+  eliminarDelCarrito(indice: number) {
+    this.carrito.eliminarItemDelCarrito(indice);
     this.productosCarrito = this.carrito.obtenerCarrito();
   }
 

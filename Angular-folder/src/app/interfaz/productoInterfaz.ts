@@ -4,4 +4,5 @@ export interface Producto {
     precio: number; 
     imagen: string;
     peso: number;
+    cantidad?: number;
  }

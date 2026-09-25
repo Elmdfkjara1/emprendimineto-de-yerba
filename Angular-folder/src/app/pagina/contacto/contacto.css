@@ -1,9 +1,11 @@
 /* Colores de la paleta del proyecto: se definen una vez y se usan abajo con var() */
 :host { /* :host apunta al componente principal, es decir a app-contacto */ 
- --beige: #C8C09A;
+ --color-arena: #c8c09a;
   --verde: #6D8A3E;
   --marron: #725530;
   --marron-rojizo: #772F13;
+
+  background: linear-gradient(180deg, var(--color-arena) 0%, #ffffff 65%);
 
   display: flex;             
   flex-wrap: wrap;           /* si no entran, la segunda baja (celular) */

@@ -45,14 +45,16 @@
         <div class="row g-3 align-items-center mb-4">
           <div class="col-auto">
             <div class="selector-cantidad d-flex align-items-center">
-              <button type="button" class="btn-cantidad">−</button>
-              <span class="cantidad-valor px-3">1</span>
-              <button type="button" class="btn-cantidad">+</button>
+              <button type="button" class="btn-cantidad" (click)="disminuirCantidad()"
+                [disabled]="cantidad === 1" aria-label="Disminuir cantidad">−</button>
+              <span class="cantidad-valor px-3">{{ cantidad }}</span>
+              <button type="button" class="btn-cantidad" (click)="aumentarCantidad()"
+                aria-label="Aumentar cantidad">+</button>
             </div>
           </div>
           <div class="col">
             <p class="mb-0 text-muted small">Precio total: </p>
-            <p class="mb-0 producto-precio">${{ producto.precio }}</p>
+            <p class="mb-0 producto-precio">${{ producto.precio * cantidad }}</p>
           </div>
         </div>
 
@@ -62,7 +64,7 @@
           <button type="button" class="btn-comprar flex-sm-fill" (click)="agregarAlCarrito(producto)">
             Agregar al carrito
           </button>
-          <button type="button" class="btn-consultar" href="contacto">
+          <button type="button" class="btn-consultar" [routerLink]="['/contacto']">
             Consultar por mayor
           </button>
         </div>

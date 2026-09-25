@@ -2,10 +2,11 @@ import { Component, Injectable } from '@angular/core';
 import { CarritoService } from './../../servicios/carrito';
 import { Producto } from '../../interfaz/productoInterfaz';
 import { ExpProductos } from '../../servicios/exp-productos';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-producto',
-  imports: [],
+  imports: [RouterLink],
   standalone: true,
   templateUrl: './producto.html',
   styleUrl: './producto.css',
@@ -16,6 +17,7 @@ import { ExpProductos } from '../../servicios/exp-productos';
 export class Productos {
   productos: Producto[];
   producto: Producto;
+  cantidad = 1;
 
   constructor(
     private carrito: CarritoService,
@@ -31,7 +33,17 @@ export class Productos {
   }
 
     agregarAlCarrito(producto: Producto) {
-      this.carrito.agregarAlCarrito(producto);
+      this.carrito.agregarAlCarrito({ ...producto, cantidad: this.cantidad });
+    }
+
+    disminuirCantidad(): void {
+      if (this.cantidad > 1) {
+        this.cantidad--;
+      }
+    }
+
+    aumentarCantidad(): void {
+      this.cantidad++;
     }
 
     seleccionarProducto(id: number): void {
@@ -39,6 +51,7 @@ export class Productos {
 
       if (productoSeleccionado) {
         this.producto = productoSeleccionado;
+        this.cantidad = 1;
       }
     }
 

@@ -71,7 +71,7 @@ textarea {
   width: 100%;
   padding: 12px 14px;
   font-size: 16px; /* 16px evita el zoom automático en iPhone */
-  border: 1px solid var(--beige);
+  border: 2px solid var(--verde);
   border-radius: 6px;
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -133,7 +133,7 @@ button:disabled {
 
 /* Preguntas frecuentes */
 .faq-container details {
-  border-bottom: 1px solid var(--beige);
+  border-bottom: 1px solid var(--color-arena);
   padding: 0.75rem 0;
 }
 

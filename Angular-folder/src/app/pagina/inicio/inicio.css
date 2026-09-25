@@ -125,3 +125,164 @@ margin: 0;
   cursor: pointer;
   flex-shrink: 0;
 }
+.sobrenosotros {
+  background-color: #f3f0e5;
+  padding: 90px 8%;
+  overflow: hidden;
+}
+
+/* TÍTULO */
+
+.sobrenosotros h2 {
+  text-align: center;
+  color: #304b2c;
+  font-size: 42px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #6b6b5e;
+  font-size: 18px;
+  margin-bottom: 80px;
+}
+
+
+/* CONTENEDOR DE CADA HISTORIA */
+
+.historia-contenido,
+.historia-pareja {
+  max-width: 1100px;
+  margin: 0 auto 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 70px;
+}
+
+
+/* TEXTO */
+
+.historia-texto,
+.pareja-texto {
+  width: 48%;
+}
+
+.historia-texto h3,
+.pareja-texto h3 {
+  color: #304b2c;
+  font-size: 32px;
+  margin: 12px 0 20px;
+}
+
+.historia-texto p,
+.pareja-texto p {
+  color: #555;
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+
+
+/* IMÁGENES */
+
+.imagen-familiar,
+.imagen-pareja {
+  width: 48%;
+}
+
+.imagen-familiar img,
+.imagen-pareja img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+
+  border-radius: 4px;
+
+  box-shadow:
+    15px 15px 0px #c8c3a2,
+    0px 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* SEGUNDA FOTO */
+
+.historia-pareja {
+  flex-direction: row-reverse;
+}
+
+.imagen-pareja img {
+  box-shadow:
+    -15px 15px 0px #c8c3a2,
+    0px 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ANIMACIONES */
+
+.aparecer-izquierda {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+.aparecer-derecha {
+  opacity: 0;
+  transform: translateX(150px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+
+/* CUANDO APARECE EN PANTALLA */
+
+.aparecer-izquierda.visible,
+.aparecer-derecha.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* CELULAR */
+
+@media (max-width: 768px) {
+
+  .sobrenosotros {
+    padding: 60px 25px;
+  }
+
+  .sobrenosotros h2 {
+    font-size: 34px;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+
+  .historia-contenido,
+  .historia-pareja {
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 100px;
+  }
+
+  .historia-texto,
+  .pareja-texto,
+  .imagen-familiar,
+  .imagen-pareja {
+    width: 100%;
+  }
+
+  .imagen-familiar img,
+  .imagen-pareja img {
+    height: 350px;
+  }
+
+}

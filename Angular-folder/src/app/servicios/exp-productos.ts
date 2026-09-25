@@ -8,17 +8,17 @@ export class ExpProductos {
   productos: Producto[] = [
     {
       id: 1,
-      nombre: 'Yerba Mate ojas 1kg',
+      nombre: 'Yerba Mate Ojas 1kg',
       precio: 10000,
-      imagen: 'assets/img/yerba.jpg',
+      imagen: 'assets/yerba2k.jpg',
       peso: 1,
       cantidad: 1,
     },
     {
       id: 2,
-      nombre: 'Yerba Mate ojas 2kg',
+      nombre: 'Yerba Mate Ojas 2kg',
       precio: 20000,
-      imagen: 'assets/img/yerba.jpg',
+      imagen: 'assets/yerba2k.jpg',
       peso: 2,
       cantidad: 1,
     },

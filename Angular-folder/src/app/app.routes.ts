@@ -7,6 +7,7 @@ import { Carrito } from './compartidos/carrito/carrito';
 import { InicioSesion } from './auth/inicio-sesion/inicio-sesion';
 import { Registro } from './auth/registro/registro';
 import { Productos } from './pagina/producto/producto';
+import { VerPedidos  } from './pagina/pedidos-admi/pedidos-admi';
 
 export const routes: Routes = [
 {path: '', redirectTo: 'inicio', pathMatch: 'full'}, 
@@ -17,5 +18,6 @@ export const routes: Routes = [
 {path: 'navbar', component: Navbar}, 
 {path: 'carrito', component: Carrito}, 
 {path: 'inicioSesion', component: InicioSesion}, 
-{path: 'registro', component: Registro}
+{path: 'registro', component: Registro},
+{path : 'pedidos-admi', component: VerPedidos},
 ];

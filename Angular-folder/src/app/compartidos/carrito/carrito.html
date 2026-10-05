@@ -1,16 +1,21 @@
 <div class="carrito-container">
 
   <h2>Carrito de compras</h2>
-
+  
   <table class="tabla-carrito">
-
+    
     <thead>
       <tr>
         <th>Producto</th>
         <th>Precio</th>
         <th>Cantidad</th>
         <th>Subtotal</th>
-        <th>Acciones</th>
+        <th class="encabezado-acciones">
+          <span>Acciones</span>
+          <button class="boton-vaciar" type="button" aria-label="Vaciar carrito" title="Vaciar carrito" (click)="vaciarCarrito()">
+            <i class="bi bi-trash" aria-hidden="true"></i>
+          </button>
+        </th>
       </tr>
     </thead>
 
@@ -20,7 +25,20 @@
         <tr>
           <td>{{ p.nombre }}</td>
           <td>${{ p.precio }}</td>
-          <td>{{ p.cantidad ?? 1 }}</td>
+          <td>
+            <button
+              type="button"
+              aria-label="Disminuir cantidad"
+              [disabled]="(p.cantidad ?? 1) <= 1"
+              (click)="disminuirCantidad(p.id)"
+            >-</button>
+            {{ p.cantidad ?? 1 }}
+            <button
+              type="button"
+              aria-label="Aumentar cantidad"
+              (click)="aumentarCantidad(p.id)"
+            >+</button>
+          </td>
           <td>${{ p.precio * (p.cantidad ?? 1) }}</td>
           <td>
             <button type="button" (click)="eliminarDelCarrito($index)">Eliminar</button>
@@ -57,6 +75,8 @@
     </tfoot>
   </table>
 
+
+  <button class="boton-compra" type="button" routerLink="/realizar-compra">Realizar compra</button>
 
 <!-- 
   en esta seccion va a ir el boton para finalizar compra 

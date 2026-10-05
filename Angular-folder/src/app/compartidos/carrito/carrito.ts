@@ -45,8 +45,18 @@ export class Carrito implements OnInit {
     this.productosCarrito = this.carrito.obtenerCarrito();
   }
 
-  
+  aumentarCantidad(id: number) {
+    this.carrito.aumentarCantidad(id);
+    this.productosCarrito = this.carrito.obtenerCarrito();
+  }
 
-  
+  disminuirCantidad(id: number) {
+    this.carrito.disminuirCantidad(id);
+    this.productosCarrito = this.carrito.obtenerCarrito();
+  }
 
+  vaciarCarrito() {
+    this.carrito.vaciarCarrito();
+    this.productosCarrito = this.carrito.obtenerCarrito();
+  }
 }

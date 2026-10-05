@@ -42,7 +42,7 @@
 }
 
 .tabla-carrito thead {
-	background: var(--color-verde);
+	background: var(--color-marron);
 	color: #ffffff;
 }
 
@@ -50,6 +50,14 @@
 	font-size: 0.78rem;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
+}
+
+.tabla-carrito thead .encabezado-acciones {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	min-width: 13rem;
 }
 
 .tabla-carrito tbody tr {
@@ -93,6 +101,59 @@
 	transform: translateY(-1px);
 }
 
+.boton-vaciar,
+.boton-compra {
+	border: 2px solid transparent;
+	border-radius: 0.65rem;
+	padding: 0.75rem 1.1rem;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.tabla-carrito .boton-vaciar {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.55rem 0.75rem;
+	border-color: var(--color-tierra);
+	background: rgba(255, 255, 255, 0.88);
+	color: var(--color-tierra);
+	box-shadow: 0 0.25rem 0.65rem rgba(119, 47, 19, 0.12);
+	font-size: 0.75rem;
+	white-space: nowrap;
+}
+
+.tabla-carrito .boton-vaciar:hover,
+.tabla-carrito .boton-vaciar:focus-visible {
+	background: var(--color-tierra);
+	color: #ffffff;
+	transform: translateY(-1px);
+}
+
+.boton-compra {
+	display: block;
+	min-width: 12rem;
+	margin: 1.25rem auto 0;
+	background: var(--color-verde);
+	color: #ffffff;
+	box-shadow: 0 0.35rem 0.8rem rgba(109, 138, 62, 0.22);
+}
+
+.boton-compra:hover,
+.boton-compra:focus-visible {
+	background: #587332;
+	box-shadow: 0 0.5rem 1rem rgba(109, 138, 62, 0.28);
+	transform: translateY(-1px);
+}
+
+.tabla-carrito .boton-vaciar:focus-visible,
+.boton-compra:focus-visible {
+	outline: 3px solid var(--color-arena);
+	outline-offset: 3px;
+}
+
 @media (max-width: 700px) {
 	:host {
 		padding: 2rem 0.75rem;
@@ -103,7 +164,22 @@
 	}
 
 	.tabla-carrito thead {
+		display: block;
+	}
+
+	.tabla-carrito thead tr {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.tabla-carrito thead th {
 		display: none;
+	}
+
+	.tabla-carrito thead .encabezado-acciones {
+		display: flex;
+		width: 100%;
+		min-width: 0;
 	}
 
 	.tabla-carrito,

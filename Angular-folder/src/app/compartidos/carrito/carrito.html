@@ -37,7 +37,21 @@
 
     <tfoot>
       <tr>
-        <th colspan="3">Precio total</th>
+        <th colspan="3">Peso total</th>
+        <th colspan="2">{{ pesoTotal }} kg</th>
+      </tr>
+      <tr>
+        <th colspan="3">Subtotal</th>
+        <th colspan="2">${{ subtotal }}</th>
+      </tr>
+      @if (descuento > 0) {
+        <tr>
+          <th colspan="3">Descuento 10%</th>
+          <th colspan="2">-${{ descuento }}</th>
+        </tr>
+      }
+      <tr>
+        <th colspan="3">Total a pagar</th>
         <th colspan="2">${{ precioTotal }}</th>
       </tr>
     </tfoot>

@@ -18,11 +18,26 @@ export class Carrito implements OnInit {
     this.productosCarrito = this.carrito.obtenerCarrito();
   }
   
-  get precioTotal(): number {
+  get pesoTotal(): number {
+    return this.productosCarrito.reduce(
+      (total, producto) => total + producto.peso * (producto.cantidad ?? 1),
+      0,
+    );
+  }
+
+  get subtotal(): number {
     return this.productosCarrito.reduce(
       (total, producto) => total + producto.precio * (producto.cantidad ?? 1),
       0,
     );
+  }
+
+  get descuento(): number {
+    return this.pesoTotal > 3 ? this.subtotal * 0.1 : 0;
+  }
+
+  get precioTotal(): number {
+    return this.subtotal - this.descuento;
   }
   
   eliminarDelCarrito(indice: number) {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Producto } from '../../interfaz/productoInterfaz';
 import { CarritoService } from '../../servicios/carrito';
 
 @Component({
   selector: 'app-carrito',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
@@ -33,7 +34,7 @@ export class Carrito implements OnInit {
   }
 
   get descuento(): number {
-    return this.pesoTotal > 3 ? this.subtotal * 0.1 : 0;
+    return this.pesoTotal >= 3 ? this.subtotal * 0.1 : 0;
   }
 
   get precioTotal(): number {

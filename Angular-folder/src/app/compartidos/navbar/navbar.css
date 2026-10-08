@@ -39,3 +39,35 @@
 .btn-sesion:hover {
   background-color: #46453a;
 }
+
+@media (max-width: 991.98px) {
+  .navbar-ojas {
+    padding: 8px 16px;
+  }
+
+  .navbar-ojas .navbar-brand img {
+    height: 48px;
+    width: auto;
+  }
+
+  .navbar-ojas .navbar-collapse {
+    flex-basis: 100%;
+  }
+
+  .navbar-ojas .navbar-nav {
+    align-items: stretch;
+    padding-top: 8px;
+  }
+
+  .navbar-ojas .nav-item {
+    margin-left: 0;
+  }
+
+  .navbar-ojas .nav-link {
+    text-align: center;
+  }
+
+  .navbar-ojas .nav-item-sesion {
+    margin: 8px 0;
+  }
+}

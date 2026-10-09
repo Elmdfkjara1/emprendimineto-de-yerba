@@ -290,3 +290,26 @@ button:disabled {
 		padding-inline: 0.65rem;
 	}
 }
+.btn-comprar {
+  display: block;
+  margin: 20px auto 0;
+
+  background-color: var(--color-tierra);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-comprar:hover {
+  background-color: #5f250f;
+  transform: translateY(-1.5px);
+}
+
+.btn-comprar:active {
+  transform: translateY(0);
+}

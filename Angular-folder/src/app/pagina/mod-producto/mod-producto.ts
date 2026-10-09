@@ -34,11 +34,19 @@ export class ModificarProducto {
 
   // Guardar el nuevo precio
   guardarPrecio(): void {
-    if (this.productoEditando && this.precioEditado > 0) {
-      this.productoEditando.precio = this.precioEditado;
-      this.productoEditando = null;
-    }
+
+  if (this.productoEditando && this.precioEditado > 0) {
+
+    this.productoEditando.precio = this.precioEditado;
+
+    alert('¡Precio modificado correctamente!');
+
+    this.productoEditando = null;
+
+  } else {
+    alert('Ingresá un precio válido.');
   }
+}
 
   // Cancelar modificación
   cancelarEdicion(): void {
@@ -48,32 +56,48 @@ export class ModificarProducto {
   // Agregar un nuevo tamaño
   agregarProducto(): void {
 
-    if (this.nuevoPeso <= 0 || this.nuevoPrecio <= 0) {
-      return;
-    }
-
-    const nuevoProducto: Producto = {
-      id: this.generarNuevoId(),
-      nombre: 'Yerba Mate Ojas ' + this.nuevoPeso + 'kg',
-      precio: this.nuevoPrecio,
-      imagen: 'assets/yerba2k.jpg',
-      peso: this.nuevoPeso,
-      cantidad: 1
-    };
-
-    this.expProductos.agregarProducto(nuevoProducto);
-
-    this.productos = this.expProductos.obtenerProductos();
-
-    this.nuevoPeso = 1;
-    this.nuevoPrecio = 0;
+  if (this.nuevoPeso <= 0 || this.nuevoPrecio <= 0) {
+    alert('Ingresá un peso y un precio válidos.');
+    return;
   }
+
+  const nuevoProducto: Producto = {
+    id: this.generarNuevoId(),
+    nombre: 'Yerba Mate Ojas ' + this.nuevoPeso + 'kg',
+    precio: this.nuevoPrecio,
+    imagen: 'assets/yerba2k.jpg',
+    peso: this.nuevoPeso,
+    cantidad: 1
+  };
+
+  this.expProductos.agregarProducto(nuevoProducto);
+
+  this.productos = this.expProductos.obtenerProductos();
+
+  alert('¡Producto agregado correctamente!');
+
+  this.nuevoPeso = 1;
+  this.nuevoPrecio = 0;
+}
 
   // Eliminar producto
   eliminarProducto(id: number): void {
+
+  const confirmar = confirm(
+    '¿Estás seguro de que querés eliminar este producto?'
+  );
+
+  if (confirmar) {
+
     this.expProductos.eliminarProducto(id);
+
     this.productos = this.expProductos.obtenerProductos();
+
+    alert('¡Producto eliminado correctamente!');
+
   }
+
+}
 
   // Generar un ID nuevo
   generarNuevoId(): number {

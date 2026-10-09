@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../interfaz/productoInterfaz';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -46,6 +47,7 @@ export class CarritoService {
   // DELETE - Vaciar carrito
   vaciarCarrito(): void {
     this.carrito = [];
+    
   }
 
 }

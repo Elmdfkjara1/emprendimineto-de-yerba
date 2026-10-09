@@ -1,0 +1,29 @@
+<h2>Pedidos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comprador</th>
+      <th>Dirección</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (pedido of pedidos; track $index) {
+
+      @for (producto of pedido.productos; track $index) {
+        <tr>
+          <td>{{ pedido.nombre }} {{ pedido.apellido }}</td>
+          <td>{{ pedido.direccion }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>${{ producto.precio }}</td>
+        </tr>
+      }
+
+    }
+  </tbody>
+</table>

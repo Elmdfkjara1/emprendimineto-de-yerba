@@ -1,23 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-ojas">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/inicio"><img src="assets/logo.png" alt="Logo" height="60 px"></a> 
+    <a class="navbar-brand" routerLink="/inicio"><img src="assets/logo.png" alt="Logo" height="60"></a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" aria-controls="navbarNavDropdown" [attr.aria-expanded]="menuAbierto" aria-label="Abrir o cerrar navegación" (click)="menuAbierto = !menuAbierto">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" [class.show]="menuAbierto">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/producto">Productos</a>
+          <a class="nav-link" routerLink="/producto" (click)="menuAbierto = false">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto">Contacto</a>
+          <a class="nav-link" routerLink="/contacto" (click)="menuAbierto = false">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/pedidos-admi">Pedidos</a>
         </li>
         <li class="nav-item nav-item-carrito">
-          <a class="nav-link" routerLink="/carrito"> <i class="bi bi-cart"></i> </a>
+          <a class="nav-link" routerLink="/carrito" aria-label="Carrito" (click)="menuAbierto = false"> <i class="bi bi-cart"></i> </a>
         </li>
         <li class="nav-item nav-item-sesion">
-          <a class="nav-link btn-sesion" routerLink="/inicioSesion">Inicio de Sesion</a>
+          <a class="nav-link btn-sesion" routerLink="/inicioSesion" (click)="menuAbierto = false">Inicio de Sesion</a>
         </li>
       </ul>
     </div>

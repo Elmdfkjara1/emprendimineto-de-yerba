@@ -1,51 +1,75 @@
 <div class="carrito-container">
-
+<div class="carrito-container">
   <h2>Carrito de compras</h2>
-
-  <table class="tabla-carrito">
-
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-
-
-    <tbody>
+  <div class="carrito-layout">
+    <div class="productos-carrito" aria-label="Productos en el carrito">
       @for (p of productosCarrito; track $index) {
-        <tr>
-          <td>{{ p.nombre }}</td>
-          <td>${{ p.precio }}</td>
-          <td>{{ p.cantidad ?? 1 }}</td>
-          <td>${{ p.precio * (p.cantidad ?? 1) }}</td>
-          <td>
-            <button type="button" (click)="eliminarDelCarrito($index)">Eliminar</button>
-          </td>
-        </tr>
+        <div class="tarjeta-producto">
+          <img class="imagen-producto" [src]="p.imagen" [alt]="p.nombre">
+          <div class="informacion-producto">
+            <h3>{{ p.nombre }}</h3>
+            <p class="cantidad-producto">Cantidad: {{ p.cantidad ?? 1 }}</p>
+          </div>
+          <div class="acciones-producto">
+            <p class="precio-producto">${{ p.precio * (p.cantidad ?? 1) }}</p>
+            <div class="controles-producto" aria-label="Acciones del producto">
+              <button
+                type="button"
+                class="boton-cantidad"
+                [attr.aria-label]="'Disminuir cantidad de ' + p.nombre"
+                [disabled]="(p.cantidad ?? 1) <= 1"
+                (click)="disminuirCantidad(p.id)"
+              >-</button>
+              <span class="cantidad-control">{{ p.cantidad ?? 1 }}</span>
+              <button
+                type="button"
+                class="boton-cantidad"
+                [attr.aria-label]="'Aumentar cantidad de ' + p.nombre"
+                (click)="aumentarCantidad(p.id)"
+              >+</button>
+              <button
+                type="button"
+                class="boton-eliminar"
+                [attr.aria-label]="'Eliminar ' + p.nombre + ' del carrito'"
+                (click)="eliminarDelCarrito($index)"
+              >
+                <i class="bi bi-trash" aria-hidden="true"></i>  
+              </button>
+            </div>
+          </div>
+        </div>
       } @empty {
-      <tr>
-        <td colspan="5" class="text-center">
-          Tu carrito está vacío
-        </td>
-      </tr>
+        <p class="carrito-vacio">Tu carrito está vacío</p>
       }
-    </tbody>
+    </div>
 
-    <tfoot>
-      <tr>
-        <th colspan="3">Precio total</th>
-        <th colspan="2">${{ precioTotal }}</th>
-      </tr>
-    </tfoot>
-  </table>
-
-
-<!-- 
-  en esta seccion va a ir el boton para finalizar compra 
-   y enviarla a la base de datos como un pedido el cual octavio 
-   va a poder visualizarlo en el componente de pedidos
- -->
+    <div class="resumen-carrito" aria-label="Resumen de compra">
+      <h3>Resumen de compra</h3>
+      <div class="fila-resumen">
+        <span>Peso total</span>
+        <span>{{ pesoTotal }} kg</span>
+      </div>
+      <div class="fila-resumen">
+        <span>Subtotal</span>
+        <span>${{ subtotal }}</span>
+      </div>
+      @if (descuento > 0) {
+        <div class="fila-resumen descuento">
+          <span>Descuento 10%</span>
+          <span>-${{ descuento }}</span>
+        </div>
+      }
+      <div class="fila-resumen total-resumen">
+        <span>Total a pagar</span>
+        <strong>${{ precioTotal }}</strong>
+      </div>
+      <button class="boton-compra" type="button" routerLink="/realizar-compra" [disabled]="productosCarrito.length === 0">
+        Finalizar compra
+      </button>
+      <button class="boton-vaciar" type="button" (click)="vaciarCarrito()" [disabled]="productosCarrito.length === 0">
+        <i class="bi bi-trash" aria-hidden="true"></i>
+        Vaciar carrito
+      </button>
+    </div>
+  </div>
+</div>

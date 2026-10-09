@@ -64,18 +64,18 @@ export class Carrito implements OnInit {
     this.carrito.vaciarCarrito();
     this.productosCarrito = this.carrito.obtenerCarrito();
   }
-}
 
-realizarPedido() {
-  const pedido = {
-    nombre: 'Juan',
-    apellido: 'Pérez',
-    direccion: 'Av. Siempre Viva 123',
-    productos: this.productosCarrito
-  };
+  realizarPedido(): void {
+    const pedido = {
+      nombre: 'Juan',
+      apellido: 'Pérez',
+      direccion: 'Av. Siempre Viva 123',
+      productos: this.productosCarrito,
+    };
 
-  this.pedidosAdmi.agregarPedido(pedido);
+    this.pedidosAdmi.agregarPedido(pedido);
 
-  this.carrito.vaciarCarrito();
-  this.productosCarrito = [];
+    this.carrito.vaciarCarrito();
+    this.productosCarrito = this.carrito.obtenerCarrito();
+  }
 }

@@ -27,4 +27,11 @@ export class ExpProductos {
    obtenerProductos() {
       return this.productos;
   }
+   agregarProducto(producto: Producto): void {
+    this.productos.push(producto);
+  }
+
+  eliminarProducto(id: number): void {
+    this.productos = this.productos.filter(producto => producto.id !== id);
+  }
 }

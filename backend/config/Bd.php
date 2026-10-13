@@ -14,9 +14,9 @@ class Bd {
             self::$conexion = new PDO(
                 // Datos de conexión:
                 // localhost: servidor donde está MySQL.
-                // emprendimiento_yerba: nombre de la base de datos.
+                // BDpasantias: nombre de la base de datos.
                 // utf8: permite trabajar correctamente con caracteres especiales.
-                "mysql:host=localhost;dbname=emprendimiento_yerba;charset=utf8",
+                "mysql:host=localhost;dbname=BDpasantias;charset=utf8",
                 // Usuario de MySQL.
                 "root",
                 // Contraseña de MySQL.

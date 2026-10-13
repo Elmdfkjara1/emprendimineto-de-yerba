@@ -65,6 +65,7 @@ export class ModificarProducto {
     id: this.generarNuevoId(),
     nombre: 'Yerba Mate Ojas ' + this.nuevoPeso + 'kg',
     precio: this.nuevoPrecio,
+    stock: 10,
     imagen: 'assets/yerba2k.jpg',
     peso: this.nuevoPeso,
     cantidad: 1

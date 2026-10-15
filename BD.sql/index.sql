@@ -38,4 +38,22 @@ CREATE TABLE pedidos (
     fecha_pedido date not null,
     total decimal(10,2) not null
 );
+
+
+CREATE TABLE carrito (
+    id int auto_increment primary key,
+    id_usuario int not null,
+    id_producto int not null,
+    cantidad int not null
+);
+
+CREATE TABLE detalle_carrito (
+    id int auto_increment primary key,
+    id_carrito int not null,
+    id_producto int not null,
+    cantidad int not null
+);
+
+
+
 --------------------------------------------------------------------------------------

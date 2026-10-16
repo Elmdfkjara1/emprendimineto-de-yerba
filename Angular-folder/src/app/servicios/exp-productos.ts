@@ -10,6 +10,7 @@ export class ExpProductos {
       id: 1,
       nombre: 'Yerba Mate Ojas 1kg',
       precio: 10000,
+      stock: 10,
       imagen: 'assets/yerba2k.jpg',
       peso: 1,
       cantidad: 1,
@@ -18,6 +19,7 @@ export class ExpProductos {
       id: 2,
       nombre: 'Yerba Mate Ojas 2kg',
       precio: 20000,
+      stock: 10,
       imagen: 'assets/yerba2k.jpg',
       peso: 2,
       cantidad: 1,
@@ -26,5 +28,12 @@ export class ExpProductos {
 
    obtenerProductos() {
       return this.productos;
+  }
+   agregarProducto(producto: Producto): void {
+    this.productos.push(producto);
+  }
+
+  eliminarProducto(id: number): void {
+    this.productos = this.productos.filter(producto => producto.id !== id);
   }
 }

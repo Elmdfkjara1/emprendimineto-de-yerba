@@ -1,0 +1,206 @@
+.contenedor {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #3f4f2f;
+  margin-bottom: 10px;
+}
+
+.descripcion {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #4f5f3d;
+  margin-bottom: 20px;
+}
+
+
+/* AGREGAR */
+
+.agregar {
+  background-color: #f4f1e8;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 35px;
+}
+
+.formulario {
+  display: flex;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.campo input {
+  width: 180px;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.btn-agregar {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #596b42;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-agregar:hover {
+  background-color: #435331;
+}
+
+
+/* PRODUCTOS */
+
+.lista {
+  margin-top: 20px;
+}
+
+.producto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  padding: 20px;
+  margin-bottom: 15px;
+
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.informacion {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.informacion img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.informacion h3 {
+  margin: 0 0 5px;
+  color: #3f4f2f;
+}
+
+.informacion p {
+  margin: 4px 0;
+  color: #777;
+}
+
+.informacion strong {
+  font-size: 18px;
+}
+
+
+/* BOTONES */
+
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-modificar,
+.btn-eliminar,
+.btn-guardar,
+.btn-cancelar {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-modificar {
+  background-color: #596b42;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #8b4b42;
+  color: white;
+}
+
+
+/* EDICIÓN */
+
+.editar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+
+  background-color: #f4f1e8;
+  border-radius: 8px;
+}
+
+.editar input {
+  width: 150px;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+.btn-guardar {
+  background-color: #596b42;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: #777;
+  color: white;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+  .producto {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .acciones {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .formulario {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .campo input {
+    width: 100%;
+  }
+
+  .btn-agregar {
+    width: 100%;
+  }
+
+}

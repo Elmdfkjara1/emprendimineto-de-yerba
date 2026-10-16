@@ -1,0 +1,147 @@
+<div class="contenedor">
+
+  <h1>Modificar productos</h1>
+
+  <p class="descripcion">
+    Desde aquí podés agregar nuevos tamaños o modificar el precio de los productos.
+  </p>
+
+
+  <!-- AGREGAR PRODUCTO -->
+
+  <section class="agregar">
+
+    <h2>Agregar nuevo tamaño</h2>
+
+    <div class="formulario">
+
+      <div class="campo">
+        <label for="peso">Tamaño</label>
+
+        <input
+          id="peso"
+          type="number"
+          [(ngModel)]="nuevoPeso"
+          min="1"
+          placeholder="Ej: 3"
+        >
+
+        <span>kg</span>
+      </div>
+
+
+      <div class="campo">
+
+        <label for="precio">Precio</label>
+
+        <input
+          id="precio"
+          type="number"
+          [(ngModel)]="nuevoPrecio"
+          min="1"
+          placeholder="Ej: 30000"
+        >
+
+      </div>
+
+      <button class="btn-agregar" (click)="agregarProducto()">
+        + Agregar producto
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- LISTA DE PRODUCTOS -->
+
+  <section class="lista">
+
+    <h2>Productos disponibles</h2>
+
+    @for (producto of productos; track producto.id) {
+
+      <div class="producto">
+
+        <div class="informacion">
+
+          <img
+            [src]="producto.imagen"
+            [alt]="producto.nombre"
+          >
+
+          <div>
+
+            <h3>{{ producto.nombre }}</h3>
+
+            <p>{{ producto.peso }} kg</p>
+
+            <strong>
+              ${{ producto.precio }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="acciones">
+
+          <button
+            class="btn-modificar"
+            (click)="editarProducto(producto)"
+          >
+            Modificar precio
+          </button>
+
+          <button
+            class="btn-eliminar"
+            (click)="eliminarProducto(producto.id)"
+          >
+            Eliminar
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- FORMULARIO DE EDICIÓN -->
+
+      @if (productoEditando?.id === producto.id) {
+
+        <div class="editar">
+
+          <label>
+            Nuevo precio:
+          </label>
+
+          <input
+            type="number"
+            [(ngModel)]="precioEditado"
+            min="1"
+          >
+
+          <button
+            class="btn-guardar"
+            (click)="guardarPrecio()"
+          >
+            Guardar
+          </button>
+
+          <button
+            class="btn-cancelar"
+            (click)="cancelarEdicion()"
+          >
+            Cancelar
+          </button>
+
+        </div>
+
+      }
+
+    }
+
+  </section>
+
+</div>

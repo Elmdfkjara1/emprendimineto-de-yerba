@@ -51,7 +51,8 @@ CREATE TABLE detalle_carrito (
     id int auto_increment primary key,
     id_carrito int not null,
     id_producto int not null,
-    cantidad int not null
+    cantidad int not null,
+    precio_unitario decimal(10,2) 
 ); --------------------------------------------------------------------------------
 
 

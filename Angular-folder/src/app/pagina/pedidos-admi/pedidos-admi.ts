@@ -8,13 +8,11 @@ import { PedidosADMI } from '../../servicios/pedidos-admi';
   styleUrl: './pedidos-admi.css'
 })
 export class VerPedidos implements OnInit {
-
   pedidos: any[] = [];
 
   constructor(private pedidosAdmi: PedidosADMI) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.pedidos = this.pedidosAdmi.obtenerPedidos();
   }
-
 }

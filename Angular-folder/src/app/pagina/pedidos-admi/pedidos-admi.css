@@ -26,3 +26,12 @@ th {
 tr:hover {
   background-color: #f5f3ea;
 }
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido {
+  flex: 1;
+} 

@@ -1,5 +1,5 @@
 
-CREATE DATABASE emprendimiento_yerba;
+CREATE DATABASE bdpasantias;
 
 use emprendimiento_yerba;
 create table usuarios(

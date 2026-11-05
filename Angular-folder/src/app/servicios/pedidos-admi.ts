@@ -1,41 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class PedidosADMI {
+  private url = 'http://localhost/api_proyecto/public/compras'; // ajustá a tu URL base
 
-  pedidos = [
-    {
-      nombre: 'Juan',
-      apellido: 'Pérez',
-      direccion: 'Av. Siempre Viva 123',
-      productos: [
-        {
-          nombre: 'Yerba Mate Ojas 1kg',
-          cantidad: 2,
-          precio: 10000
-        }
-      ]
-    },
-    {
-      nombre: 'Ana',
-      apellido: 'Gómez',
-      direccion: 'Calle Mitre 456',
-      productos: [
-        {
-          nombre: 'Yerba Mate Ojas 2kg',
-          cantidad: 1,
-          precio: 20000
-        }
-      ]
-    }
-  ];
+  constructor(private http: HttpClient) {}
 
   obtenerPedidos() {
-    return this.pedidos;
+    return this.http.get<any[]>(`${this.url}/todas`);
   }
-  agregarPedido(pedido: any) {
-    this.pedidos.push(pedido);
+
+  finalizarCompra() {
+    return this.http.post<{ mensaje: string; id_pedido: number; total: number }>(
+      `${this.url}/finalizar`, {}
+    );
   }
 }

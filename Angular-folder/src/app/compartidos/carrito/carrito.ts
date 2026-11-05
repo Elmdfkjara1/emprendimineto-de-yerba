@@ -1,40 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Producto } from '../../interfaz/productoInterfaz';
-import { CarritoService } from '../../servicios/carrito';
+import { Router } from '@angular/router';
+import { CarritoService, ItemCarrito } from '../../servicios/carrito';
 import { PedidosADMI } from '../../servicios/pedidos-admi';
 
 @Component({
   selector: 'app-carrito',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
 export class Carrito implements OnInit {
 
-  productosCarrito: Producto[] = [];
+  productosCarrito: ItemCarrito[] = [];
+  pedido: { id_pedido: number; total: number } | null = null;
+  whatsappUrl = '';
+  private urlImagenes = 'http://localhost/api_proyecto/public/uploads/';
 
   constructor(
     private carrito: CarritoService,
-    private pedidosAdmi: PedidosADMI
+    private pedidosAdmi: PedidosADMI,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.productosCarrito = this.carrito.obtenerCarrito();
+    this.cargar();
+  }
+
+  cargar() {
+    this.carrito.obtenerCarrito().subscribe({
+      next: items => this.productosCarrito = items,
+      error: err => this.manejarError(err)
+    });
+  }
+
+  urlImagen(p: ItemCarrito): string {
+    return this.urlImagenes + p.imagen;
   }
 
   get pesoTotal(): number {
-    return this.productosCarrito.reduce(
-      (total, producto) => total + producto.peso * (producto.cantidad ?? 1),
-      0,
-    );
+    return this.productosCarrito.reduce((t, p) => t + p.peso * p.cantidad, 0);
   }
 
   get subtotal(): number {
-    return this.productosCarrito.reduce(
-      (total, producto) => total + producto.precio * (producto.cantidad ?? 1),
-      0,
-    );
+    return this.productosCarrito.reduce((t, p) => t + p.precio * p.cantidad, 0);
   }
 
   get descuento(): number {
@@ -45,37 +53,43 @@ export class Carrito implements OnInit {
     return this.subtotal - this.descuento;
   }
 
-  eliminarDelCarrito(indice: number) {
-    this.carrito.eliminarItemDelCarrito(indice);
-    this.productosCarrito = this.carrito.obtenerCarrito();
+  aumentarCantidad(p: ItemCarrito) {
+    this.carrito.actualizarCantidad(p.id_producto, p.cantidad + 1)
+      .subscribe(() => this.cargar());
   }
 
-  aumentarCantidad(id: number) {
-    this.carrito.aumentarCantidad(id);
-    this.productosCarrito = this.carrito.obtenerCarrito();
+  disminuirCantidad(p: ItemCarrito) {
+    if (p.cantidad <= 1) return;
+    this.carrito.actualizarCantidad(p.id_producto, p.cantidad - 1)
+      .subscribe(() => this.cargar());
   }
 
-  disminuirCantidad(id: number) {
-    this.carrito.disminuirCantidad(id);
-    this.productosCarrito = this.carrito.obtenerCarrito();
+  eliminarDelCarrito(p: ItemCarrito) {
+    this.carrito.eliminar(p.id_producto).subscribe(() => this.cargar());
   }
 
   vaciarCarrito() {
-    this.carrito.vaciarCarrito();
-    this.productosCarrito = this.carrito.obtenerCarrito();
+    this.carrito.vaciar().subscribe(() => this.cargar());
   }
 
-  realizarPedido(): void {
-    const pedido = {
-      nombre: 'Juan',
-      apellido: 'Pérez',
-      direccion: 'Av. Siempre Viva 123',
-      productos: this.productosCarrito,
-    };
+  realizarCompra() {
+    this.pedidosAdmi.finalizarCompra().subscribe({
+      next: res => {
+        this.pedido = res;
+        this.productosCarrito = []; // el servidor ya vació el carrito
+        const msg = `Hola, hice el pedido #${res.id_pedido} por $${res.total}. Te envío el comprobante.`;
+        this.whatsappUrl = `https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(msg)}`;
+      },
+      error: err => this.manejarError(err)
+    });
+  }
 
-    this.pedidosAdmi.agregarPedido(pedido);
-
-    this.carrito.vaciarCarrito();
-    this.productosCarrito = this.carrito.obtenerCarrito();
+  private manejarError(err: any) {
+    if (err.status === 401) {
+      alert('Debés iniciar sesión para comprar');
+      this.router.navigate(['/login']);
+    } else {
+      alert(err.error?.error ?? 'Ocurrió un error');
+    }
   }
 }

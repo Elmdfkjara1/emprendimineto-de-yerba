@@ -30,7 +30,8 @@ CREATE TABLE detalle_pedido (
     id_producto int not null,
     id_usuario int not null,
     cantidad int not null,
-    nombre_producto varchar(50) not null
+    nombre_producto varchar(50) not null,
+    precio_unitario decimal(10,2) not null
 );
 CREATE TABLE pedidos (
     id int auto_increment primary key,

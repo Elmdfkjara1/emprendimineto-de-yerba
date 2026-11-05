@@ -11,8 +11,7 @@ export class VerPedidos implements OnInit {
   pedidos: any[] = [];
 
   constructor(private pedidosAdmi: PedidosADMI) {}
-
-  ngOnInit(): void {
-    this.pedidos = this.pedidosAdmi.obtenerPedidos();
-  }
+ngOnInit(): void {
+  this.pedidosAdmi.obtenerPedidos().subscribe(p => this.pedidos = p);
+}
 }

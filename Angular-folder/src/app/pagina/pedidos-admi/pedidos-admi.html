@@ -3,39 +3,41 @@
 <table>
   <thead>
     <tr>
+      <th>Número</th>
       <th>Comprador</th>
-      <th>Dirección</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Precio</th>
-      <th>entregado?</th>
+      <th>Correo</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th>Entregado</th>
     </tr>
   </thead>
 
   <tbody>
-    @for (pedido of pedidos; track $index; let indicePedido = $index) {
-
-      @for (producto of pedido.productos; track $index; let indiceProducto = $index) {
+    @if (error) {
+      <tr><td colspan="6" role="alert">{{ error }}</td></tr>
+    } @else {
+      @for (pedido of pedidos; track pedido.id; let indicePedido = $index) {
         <tr>
-          <td>{{ pedido.nombre }} {{ pedido.apellido }}</td>
-          <td>{{ pedido.direccion }}</td>
-          <td>{{ producto.nombre }}</td>
-          <td>{{ producto.cantidad }}</td>
-          <td>${{ producto.precio }}</td>
+          <td>#{{ pedido.id }}</td>
+          <td>{{ pedido.nombre }}</td>
+          <td>{{ pedido.email }}</td>
+          <td>{{ pedido.fecha_pedido }}</td>
+          <td>${{ pedido.total }}</td>
           <td>
             <button
               type="button"
               class="btn-check-pedido"
-              [attr.aria-label]="'Completar pedido de ' + producto.nombre"
-              title="Completar pedido"
-              (click)="eliminarFilaPedido(indicePedido, indiceProducto)"
+              [attr.aria-label]="'Quitar pedido número ' + pedido.id + ' de la lista'"
+              title="Quitar pedido de la lista"
+              (click)="eliminarFilaPedido(indicePedido)"
             >
               <i class="bi bi-check-lg" aria-hidden="true"></i>
             </button>
           </td>
         </tr>
+      } @empty {
+        <tr><td colspan="6">No hay pedidos para mostrar.</td></tr>
       }
-
     }
   </tbody>
 </table>

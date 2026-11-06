@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PedidosADMI } from '../../servicios/pedidos-admi';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Pedido, PedidosADMI } from '../../servicios/pedidos-admi';
 
 @Component({
   selector: 'app-ver-pedidos',
@@ -8,16 +8,29 @@ import { PedidosADMI } from '../../servicios/pedidos-admi';
   styleUrl: './pedidos-admi.css'
 })
 export class VerPedidos implements OnInit {
-  pedidos: any[] = [];
+  pedidos: Pedido[] = [];
+  error = '';
 
-  constructor(private pedidosAdmi: PedidosADMI) {}
+  constructor(
+    private pedidosAdmi: PedidosADMI,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
-    this.pedidos = this.pedidosAdmi.obtenerPedidos();
+    this.pedidosAdmi.obtenerPedidos().subscribe({
+      next: (pedidos) => {
+        this.pedidos = pedidos;
+        this.changeDetector.markForCheck();
+      },
+      error: (error: unknown) => {
+        console.error('No se pudieron cargar los pedidos', error);
+        this.error = 'No se pudieron cargar los pedidos.';
+        this.changeDetector.markForCheck();
+      },
+    });
   }
 
-  eliminarFilaPedido(indicePedido: number, indiceProducto: number): void {
-    this.pedidosAdmi.eliminarProductoPedido(indicePedido, indiceProducto);
-    this.pedidos = [...this.pedidosAdmi.obtenerPedidos()];
+  eliminarFilaPedido(indicePedido: number): void {
+    this.pedidos = this.pedidos.filter((_, indice) => indice !== indicePedido);
   }
 }

@@ -66,8 +66,8 @@
 
         <!-- CTA -->
         <div class="d-grid d-sm-flex gap-3">
-          <button type="button" class="btn-comprar flex-sm-fill" (click)="agregarAlCarrito(producto)">
-            Agregar al carrito
+          <button type="button" class="btn-comprar flex-sm-fill" (click)="agregarAlCarrito(producto)" [disabled]="agregando">
+            {{ agregando ? 'Agregando...' : 'Agregar al carrito' }}
           </button>
           <button type="button" class="btn-consultar" [routerLink]="['/contacto']">
             Consultar por mayor

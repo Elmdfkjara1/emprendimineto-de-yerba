@@ -1,38 +1,59 @@
+// Importa Component, que permite definir un componente de Angular.
+import { Component } from "@angular/core";
 
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../servicios/auth';
+// Importa CommonModule por si usas directivas comunes (opcional pero recomendado)
+import { CommonModule } from "@angular/common";
 
+// Importa FormsModule para poder usar ngModel en el formulario HTML.
+import { FormsModule } from "@angular/forms";
+
+// Importa AuthService, que contiene el método para iniciar sesión
+// y comunicarse con la API REST en PHP.
+import { AuthService } from "../../servicios/auth";
+
+// Importa Router, que permite navegar entre las páginas
+// de la aplicación sin tener que recargarla.
+import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
+
+// Define las características principales del componente.
 @Component({
-  selector: 'app-inicio-sesion',
-  imports: [RouterLink, FormsModule],
-  templateUrl: './inicio-sesion.html',
-  styleUrl: './inicio-sesion.css',
+  selector: "app-inicio-sesion",
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: "./inicio-sesion.html",
+  styleUrl: "./inicio-sesion.css"
 })
 export class InicioSesion {
-  email: string = '';
-  password: string = '';
+  // Almacena el correo electrónico ingresado en el formulario.
+  email = "";
 
-  constructor(
-    private authService: AuthService
-  ) {}
+  // Almacena la contraseña ingresada por el usuario.
+  password = "";
 
-  confirmarUsuario(mail: string, password: string): void {
-    if (!mail || !password) {
-      console.log('Todos los campos son obligatorios');
-      return;
-    }
+  // Almacena el mensaje de error que se mostrará si el inicio de sesión falla.
+  error = "";
 
-    const usuario = this.authService.obtenerUsuario().find(
-      usuario => usuario.mail === mail &&
-                 usuario.password === password
-    );
+  // Inyecta AuthService para realizar el inicio de sesión
+  // y Router para navegar después de recibir la respuesta.
+  constructor(private auth: AuthService, private router: Router) {}
 
-    if (usuario) {
-      console.log('Inicio de sesión exitoso');
-    } else {
-      console.log('Credenciales inválidas');
-    }
+  // Método que se ejecuta cuando el usuario intenta ingresar.
+  ingresar(): void {
+    this.error = "";
+
+    this.auth.login(this.email, this.password).subscribe({
+      next: () => {
+        this.router.navigate(["/inicio"]);
+        alert("Inicio de sesión exitoso");
+      },
+      error: (error: HttpErrorResponse) => {
+        this.error = error.status === 0
+          ? "No se pudo conectar con el servidor. Verifica que la API esté activa."
+          : error.status === 401
+            ? "Email o contraseña incorrectos."
+            : "No se pudo iniciar sesión. Intenta nuevamente.";
+      }
+    });
   }
 }

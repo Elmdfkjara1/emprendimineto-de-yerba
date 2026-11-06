@@ -8,19 +8,31 @@
       <th>Producto</th>
       <th>Cantidad</th>
       <th>Precio</th>
+      <th>entregado?</th>
     </tr>
   </thead>
 
   <tbody>
-    @for (pedido of pedidos; track $index) {
+    @for (pedido of pedidos; track $index; let indicePedido = $index) {
 
-      @for (producto of pedido.productos; track $index) {
+      @for (producto of pedido.productos; track $index; let indiceProducto = $index) {
         <tr>
           <td>{{ pedido.nombre }} {{ pedido.apellido }}</td>
           <td>{{ pedido.direccion }}</td>
           <td>{{ producto.nombre }}</td>
           <td>{{ producto.cantidad }}</td>
           <td>${{ producto.precio }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn-check-pedido"
+              [attr.aria-label]="'Completar pedido de ' + producto.nombre"
+              title="Completar pedido"
+              (click)="eliminarFilaPedido(indicePedido, indiceProducto)"
+            >
+              <i class="bi bi-check-lg" aria-hidden="true"></i>
+            </button>
+          </td>
         </tr>
       }
 

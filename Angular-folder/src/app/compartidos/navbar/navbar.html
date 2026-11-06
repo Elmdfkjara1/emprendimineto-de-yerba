@@ -22,7 +22,11 @@
           <a class="nav-link" routerLink="/carrito" aria-label="Carrito" (click)="menuAbierto = false"> <i class="bi bi-cart"></i> </a>
         </li>
         <li class="nav-item nav-item-sesion">
+          @if(authService.estaLogueado()){<!-- Comprueba si el usuario está autenticado. -->
+          <button class="nav-link btn-sesion" type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+          }@else{<!-- Si el usuario no está autenticado, muestra el enlace de inicio de sesión. -->
           <a class="nav-link btn-sesion" routerLink="/inicioSesion" (click)="menuAbierto = false">Inicio de Sesion</a>
+          }
         </li>
       </ul>
     </div>

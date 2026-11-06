@@ -9,6 +9,8 @@ import { Registro } from './auth/registro/registro';
 import { Productos } from './pagina/producto/producto';
 import { ModificarProducto } from './pagina/mod-producto/mod-producto';
 import { VerPedidos  } from './pagina/pedidos-admi/pedidos-admi';
+import { adminGuard } from "./guard/admin.guard";
+import { Admin } from './paginas/admin/admin';
 
 export const routes: Routes = [
 {path: '', redirectTo: 'inicio', pathMatch: 'full'}, 
@@ -20,6 +22,7 @@ export const routes: Routes = [
 {path: 'carrito', component: Carrito}, 
 {path: 'inicioSesion', component: InicioSesion}, 
 {path: 'registro', component: Registro},
-{path: 'modificar-producto', component: ModificarProducto},
+{path: 'modificar-producto', component: ModificarProducto, canActivate: [adminGuard]},
 {path : 'pedidos-admi', component: VerPedidos},
+{ path: "paginas/admin", component: Admin, canActivate: [adminGuard] }
 ];

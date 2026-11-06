@@ -15,4 +15,9 @@ export class VerPedidos implements OnInit {
   ngOnInit(): void {
     this.pedidos = this.pedidosAdmi.obtenerPedidos();
   }
+
+  eliminarFilaPedido(indicePedido: number, indiceProducto: number): void {
+    this.pedidosAdmi.eliminarProductoPedido(indicePedido, indiceProducto);
+    this.pedidos = [...this.pedidosAdmi.obtenerPedidos()];
+  }
 }

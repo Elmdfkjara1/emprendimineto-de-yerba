@@ -6,6 +6,12 @@
     Desde aquí podés agregar nuevos tamaños o modificar el precio de los productos.
   </p>
 
+  @if (error) {
+    <p role="alert">{{ error }}</p>
+  }
+  @if (mensaje) {
+    <p role="status">{{ mensaje }}</p>
+  }
 
   <!-- AGREGAR PRODUCTO -->
 
@@ -24,6 +30,7 @@
           [(ngModel)]="nuevoPeso"
           min="1"
           placeholder="Ej: 3"
+          [disabled]="guardando"
         >
 
         <span>kg</span>
@@ -40,12 +47,13 @@
           [(ngModel)]="nuevoPrecio"
           min="1"
           placeholder="Ej: 30000"
+          [disabled]="guardando"
         >
 
       </div>
 
-      <button class="btn-agregar" (click)="agregarProducto()">
-        + Agregar producto
+      <button class="btn-agregar" (click)="agregarProducto()" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : '+ Agregar producto' }}
       </button>
 
     </div>
@@ -58,6 +66,12 @@
   <section class="lista">
 
     <h2>Productos disponibles</h2>
+
+    @if (cargando) {
+      <p role="status">Cargando productos...</p>
+    } @else if (productos.length === 0) {
+      <p>No hay productos disponibles.</p>
+    }
 
     @for (producto of productos; track producto.id) {
 
@@ -90,6 +104,7 @@
           <button
             class="btn-modificar"
             (click)="editarProducto(producto)"
+            [disabled]="guardando"
           >
             Modificar precio
           </button>
@@ -97,6 +112,7 @@
           <button
             class="btn-eliminar"
             (click)="eliminarProducto(producto.id)"
+            [disabled]="guardando"
           >
             Eliminar
           </button>
@@ -120,18 +136,21 @@
             type="number"
             [(ngModel)]="precioEditado"
             min="1"
+            [disabled]="guardando"
           >
 
           <button
             class="btn-guardar"
             (click)="guardarPrecio()"
+            [disabled]="guardando"
           >
-            Guardar
+            {{ guardando ? 'Guardando...' : 'Guardar' }}
           </button>
 
           <button
             class="btn-cancelar"
             (click)="cancelarEdicion()"
+            [disabled]="guardando"
           >
             Cancelar
           </button>

@@ -1,111 +1,160 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ExpProductos } from '../../servicios/exp-productos';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Producto } from '../../interfaz/productoInterfaz';
+import { ProductoActualizacion, ProductosApi } from '../../servicios/productos-api';
 
 @Component({
   selector: 'app-modificar-producto',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './mod-producto.html',
-  styleUrl: './mod-producto.css'
+  styleUrl: './mod-producto.css',
 })
-export class ModificarProducto {
-
+export class ModificarProducto implements OnInit {
   productos: Producto[] = [];
-
-  // Datos para agregar un nuevo producto
-  nuevoPeso: number = 1;
-  nuevoPrecio: number = 0;
-
-  // Producto que se está modificando
+  nuevoPeso = 1;
+  nuevoPrecio = 0;
   productoEditando: Producto | null = null;
-  precioEditado: number = 0;
+  precioEditado = 0;
+  cargando = true;
+  guardando = false;
+  error = '';
+  mensaje = '';
 
-  constructor(private expProductos: ExpProductos) {
-    this.productos = this.expProductos.obtenerProductos();
+  constructor(
+    private productosApi: ProductosApi,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarProductos();
   }
 
-  // Comenzar a modificar un producto
+  cargarProductos(): void {
+    this.cargando = true;
+    this.error = '';
+
+    this.productosApi.listar().subscribe({
+      next: (productos) => {
+        this.productos = productos;
+        this.cargando = false;
+        this.changeDetector.markForCheck();
+      },
+      error: (error: unknown) => {
+        console.error('No se pudieron cargar los productos para administrarlos', error);
+        this.error = this.mensajeError(error, 'No se pudieron cargar los productos.');
+        this.cargando = false;
+        this.changeDetector.markForCheck();
+      },
+    });
+  }
+
   editarProducto(producto: Producto): void {
     this.productoEditando = producto;
     this.precioEditado = producto.precio;
+    this.error = '';
+    this.mensaje = '';
   }
 
-  // Guardar el nuevo precio
   guardarPrecio(): void {
-
-  if (this.productoEditando && this.precioEditado > 0) {
-
-    this.productoEditando.precio = this.precioEditado;
-
-    alert('¡Precio modificado correctamente!');
-
-    this.productoEditando = null;
-
-  } else {
-    alert('Ingresá un precio válido.');
-  }
-}
-
-  // Cancelar modificación
-  cancelarEdicion(): void {
-    this.productoEditando = null;
-  }
-
-  // Agregar un nuevo tamaño
-  agregarProducto(): void {
-
-  if (this.nuevoPeso <= 0 || this.nuevoPrecio <= 0) {
-    alert('Ingresá un peso y un precio válidos.');
-    return;
-  }
-
-  const nuevoProducto: Producto = {
-    id: this.generarNuevoId(),
-    nombre: 'Yerba Mate Ojas ' + this.nuevoPeso + 'kg',
-    precio: this.nuevoPrecio,
-    stock: 10,
-    imagen: 'assets/yerba2k.jpg',
-    peso: this.nuevoPeso,
-    cantidad: 1
-  };
-
-  this.expProductos.agregarProducto(nuevoProducto);
-
-  this.productos = this.expProductos.obtenerProductos();
-
-  alert('¡Producto agregado correctamente!');
-
-  this.nuevoPeso = 1;
-  this.nuevoPrecio = 0;
-}
-
-  // Eliminar producto
-  eliminarProducto(id: number): void {
-
-  const confirmar = confirm(
-    '¿Estás seguro de que querés eliminar este producto?'
-  );
-
-  if (confirmar) {
-
-    this.expProductos.eliminarProducto(id);
-
-    this.productos = this.expProductos.obtenerProductos();
-
-    alert('¡Producto eliminado correctamente!');
-
-  }
-
-}
-
-  // Generar un ID nuevo
-  generarNuevoId(): number {
-    if (this.productos.length === 0) {
-      return 1;
+    if (!this.productoEditando || this.precioEditado <= 0) {
+      this.error = 'Ingresá un precio válido.';
+      return;
     }
 
-    return Math.max(...this.productos.map(producto => producto.id)) + 1;
+    const producto = this.productoEditando;
+    const datos: ProductoActualizacion = {
+      nombre: producto.nombre,
+      precio: this.precioEditado,
+      stock: producto.stock,
+      imagen: producto.imagen,
+      peso: producto.peso,
+      cantidadKilos: producto.cantidadKilos ?? 1,
+    };
+
+    this.guardando = true;
+    this.error = '';
+    this.mensaje = '';
+    this.productosApi.actualizar(producto.id, datos).subscribe({
+      next: () => {
+        this.productoEditando = null;
+        this.mensaje = 'Precio actualizado correctamente.';
+        this.guardando = false;
+        this.cargarProductos();
+      },
+      error: (error: unknown) => this.manejarError(error, 'No se pudo actualizar el producto.'),
+    });
+  }
+
+  cancelarEdicion(): void {
+    this.productoEditando = null;
+    this.error = '';
+  }
+
+  agregarProducto(): void {
+    if (this.nuevoPeso <= 0 || this.nuevoPrecio <= 0) {
+      this.error = 'Ingresá un peso y un precio válidos.';
+      return;
+    }
+
+    this.guardando = true;
+    this.error = '';
+    this.mensaje = '';
+    this.productosApi.crear({
+      nombre: `Yerba Mate Ojas ${this.nuevoPeso}kg`,
+      precio: this.nuevoPrecio,
+      stock: 10,
+      imagen: 'assets/yerba2k.jpg',
+      peso: this.nuevoPeso,
+      cantidadKilos: 1,
+    }).subscribe({
+      next: () => {
+        this.nuevoPeso = 1;
+        this.nuevoPrecio = 0;
+        this.mensaje = 'Producto agregado correctamente.';
+        this.guardando = false;
+        this.cargarProductos();
+      },
+      error: (error: unknown) => this.manejarError(error, 'No se pudo agregar el producto.'),
+    });
+  }
+
+  eliminarProducto(id: number): void {
+    if (!confirm('¿Estás seguro de que querés eliminar este producto?')) {
+      return;
+    }
+
+    this.guardando = true;
+    this.error = '';
+    this.mensaje = '';
+    this.productosApi.eliminar(id).subscribe({
+      next: () => {
+        this.mensaje = 'Producto eliminado correctamente.';
+        this.guardando = false;
+        this.cargarProductos();
+      },
+      error: (error: unknown) => this.manejarError(error, 'No se pudo eliminar el producto.'),
+    });
+  }
+
+  private manejarError(error: unknown, mensajePredeterminado: string): void {
+    console.error(mensajePredeterminado, error);
+    this.error = this.mensajeError(error, mensajePredeterminado);
+    this.guardando = false;
+    this.changeDetector.markForCheck();
+  }
+
+  private mensajeError(error: unknown, mensajePredeterminado: string): string {
+    if (error instanceof HttpErrorResponse && typeof error.error?.error === 'string') {
+      return error.error.error;
+    }
+    if (error instanceof HttpErrorResponse && error.status === 401) {
+      return 'Iniciá sesión nuevamente para administrar productos.';
+    }
+    if (error instanceof HttpErrorResponse && error.status === 403) {
+      return 'Tu usuario no tiene permisos de administrador.';
+    }
+    return mensajePredeterminado;
   }
 }

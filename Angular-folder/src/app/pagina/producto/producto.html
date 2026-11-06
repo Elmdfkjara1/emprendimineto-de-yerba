@@ -1,5 +1,13 @@
 <section class="producto-seccion py-5">
   <div class="container">
+    @if (cargando) {
+      <p role="status">Cargando productos...</p>
+    } @else if (error) {
+      <p role="alert">{{ error }}</p>
+      <button type="button" class="btn-comprar" (click)="cargarProductos()">Reintentar</button>
+    } @else if (productos.length === 0) {
+      <p>No hay productos disponibles en este momento.</p>
+    } @else if (producto) {
     <div class="row g-5 align-items-center">
 
       <!-- Columna imagen -->
@@ -28,16 +36,13 @@
         <div class="mb-4">
           <span class="fw-semibold d-block mb-2">Elegí el formato</span>
           <div class="d-flex flex-wrap gap-2">
-            <button type="button" class="btn-variante" [class.activa]="producto.id === 1"
-              [attr.aria-pressed]="producto.id === 1" (click)="seleccionarProducto(1)">
-              <span class="d-block fw-semibold">{{ productos[0].nombre }}</span>
-              <span class="d-block small">${{ productos[0].precio }}</span>
-            </button>
-            <button type="button" class="btn-variante" [class.activa]="producto.id === 2"
-              [attr.aria-pressed]="producto.id === 2" (click)="seleccionarProducto(2)">
-              <span class="d-block fw-semibold">{{ productos[1].nombre }}</span>
-              <span class="d-block small">${{ productos[1].precio }}</span>
-            </button>
+            @for (variante of productos; track variante.id) {
+              <button type="button" class="btn-variante" [class.activa]="producto.id === variante.id"
+                [attr.aria-pressed]="producto.id === variante.id" (click)="seleccionarProducto(variante.id)">
+                <span class="d-block fw-semibold">{{ variante.nombre }}</span>
+                <span class="d-block small">${{ variante.precio }}</span>
+              </button>
+            }
           </div>
         </div>
 
@@ -49,7 +54,7 @@
                 [disabled]="cantidad === 1" aria-label="Disminuir cantidad">−</button>
               <span class="cantidad-valor px-3">{{ cantidad }}</span>
               <button type="button" class="btn-cantidad" (click)="aumentarCantidad()"
-                aria-label="Aumentar cantidad">+</button>
+                [disabled]="cantidad >= producto.stock" aria-label="Aumentar cantidad">+</button>
             </div>
           </div>
           <div class="col">
@@ -71,5 +76,6 @@
       </div>
 
     </div>
+    }
   </div>
 </section>

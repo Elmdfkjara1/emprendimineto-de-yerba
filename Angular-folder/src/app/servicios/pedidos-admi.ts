@@ -38,4 +38,16 @@ export class PedidosADMI {
   agregarPedido(pedido: any) {
     this.pedidos.push(pedido);
   }
+
+  eliminarProductoPedido(indicePedido: number, indiceProducto: number): void {
+    const pedido = this.pedidos[indicePedido];
+    if (!pedido || !pedido.productos[indiceProducto]) {
+      return;
+    }
+
+    pedido.productos.splice(indiceProducto, 1);
+    if (pedido.productos.length === 0) {
+      this.pedidos.splice(indicePedido, 1);
+    }
+  }
 }

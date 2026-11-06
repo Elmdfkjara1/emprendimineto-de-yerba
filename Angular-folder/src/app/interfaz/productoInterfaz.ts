@@ -6,4 +6,5 @@ export interface Producto {
     imagen: string;
     peso: number;
     cantidad?: number;
+    cantidadKilos?: number;
  }

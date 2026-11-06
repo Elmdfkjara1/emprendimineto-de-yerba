@@ -21,14 +21,11 @@ private authService: AuthService
     console.log('Todos los campos son obligatorios');
     return;
   }
-    const nuevoUsuario = {
-      id: this.authService.obtenerUsuario().length + 1,
-      nombre: nombre,
-      mail: mail, 
-      password: password,
-      admin: true
-    };
-    this.authService.agregarUsuario(nuevoUsuario);
+    this.authService.registro({ nombre, mail, password, rol }).subscribe({
+      error: (error: unknown) => {
+        console.error('No se pudo registrar el usuario', error);
+      },
+    });
   }
 
   

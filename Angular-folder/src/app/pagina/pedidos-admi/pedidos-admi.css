@@ -26,6 +26,27 @@ th {
 tr:hover {
   background-color: #f5f3ea;
 }
+
+.btn-check-pedido {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background-color: #6d8a3e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-check-pedido:hover {
+  background-color: #526b2d;
+}
+
+.btn-check-pedido:focus-visible {
+  outline: 3px solid #c8bf9a;
+  outline-offset: 2px;
+}
 :host {
   min-height: 100vh;
   display: flex;

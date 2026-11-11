@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { Producto } from '../interfaz/productoInterfaz';
 
 export interface ItemCarrito {
   id: number;
@@ -15,13 +16,21 @@ export interface ItemCarrito {
 
 @Injectable({ providedIn: 'root' })
 export class CarritoService {
-  private url = 'http://localhost/api_proyecto/public/carrito'; // misma base que los otros servicios
+  private url = 'http://localhost/api_proyecto/public/carrito';
+  carrito: Producto[] = [];
+  mensajeToast = signal('');
 
   constructor(private http: HttpClient) {}
 
+  private mostrarMensaje(mensaje: string): void {
+    this.mensajeToast.set(mensaje);
+    window.setTimeout(() => {
+      this.mensajeToast.set('');
+    }, 2500);
+  }
+
   obtenerCarrito(): Observable<ItemCarrito[]> {
     return this.http.get<any[]>(this.url).pipe(
-      // PDO devuelve números como texto: los convertimos acá
       map(items => items.map(i => ({
         ...i,
         id: +i.id,
@@ -34,8 +43,17 @@ export class CarritoService {
     );
   }
 
+  obtenerCarritoLocal(): Producto[] {
+    return this.carrito;
+  }
+
   agregar(idProducto: number, cantidad = 1) {
     return this.http.post(`${this.url}/agregar`, { id_producto: idProducto, cantidad });
+  }
+
+  agregarAlCarrito(producto: Producto): void {
+    this.carrito.push(producto);
+    this.mostrarMensaje('Producto agregado al carrito');
   }
 
   actualizarCantidad(idProducto: number, cantidad: number) {
@@ -46,33 +64,6 @@ export class CarritoService {
     return this.http.delete(`${this.url}/eliminar/${idProducto}`);
   }
 
-  vaciar() {
-    return this.http.delete(`${this.url}/vaciar`);
-  }
-}
-
-  carrito: Producto[] = [];
-  mensajeToast = signal('');
-
-  private mostrarMensaje(mensaje: string): void {
-    this.mensajeToast.set(mensaje);
-    window.setTimeout(() => {
-      this.mensajeToast.set('');
-    }, 2500);
-  }
-
-  // READ - Obtener productos del carrito
-  obtenerCarrito(): Producto[] {
-    return this.carrito;
-  }
-
-  // CREATE - Agregar producto al carrito
-  agregarAlCarrito(producto: Producto): void {
-    this.carrito.push(producto);
-    this.mostrarMensaje('Producto agregado al carrito');
-  }
-
-  // DELETE - Eliminar producto por ID
   eliminarDelCarrito(id: number): void {
     this.carrito = this.carrito.filter(producto => producto.id !== id);
     this.mostrarMensaje('Producto eliminado del carrito');
@@ -97,11 +88,13 @@ export class CarritoService {
     }
   }
 
-  // DELETE - Vaciar carrito
+  vaciar() {
+    return this.http.delete(`${this.url}/vaciar`);
+  }
+
   vaciarCarrito(): void {
     this.carrito = [];
     this.mostrarMensaje('Carrito vaciado');
   }
-
 }
 

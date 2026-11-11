@@ -1,10 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CarritoService } from './../../servicios/carrito';
 import { Producto } from '../../interfaz/productoInterfaz';
 import { ExpProductos } from '../../servicios/exp-productos';
-import { RouterLink } from '@angular/router';
-
 
 @Component({
   selector: 'app-producto',
@@ -12,10 +10,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   templateUrl: './producto.html',
   styleUrl: './producto.css',
-})
-@Injectable({
-  providedIn: 'root',
-
 })
 export class Productos {
   productos: Producto[];

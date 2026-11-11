@@ -1,5 +1,5 @@
 
-CREATE DATABASE emprendimiento_yerba;
+CREATE DATABASE bdpasantias;
 
 use emprendimiento_yerba;
 create table usuarios(
@@ -30,7 +30,8 @@ CREATE TABLE detalle_pedido (
     id_producto int not null,
     id_usuario int not null,
     cantidad int not null,
-    nombre_producto varchar(50) not null
+    nombre_producto varchar(50) not null,
+    precio_unitario decimal(10,2) not null
 );
 CREATE TABLE pedidos (
     id int auto_increment primary key,
@@ -44,14 +45,16 @@ CREATE TABLE carrito (
     id int auto_increment primary key,
     id_usuario int not null,
     id_producto int not null,
-    cantidad int not null
+    cantidad int not null,
+    estado ENUM('abierto', 'cerrado') NOT NULL DEFAULT 'abierto'
 );
 
 CREATE TABLE detalle_carrito (
     id int auto_increment primary key,
     id_carrito int not null,
     id_producto int not null,
-    cantidad int not null
+    cantidad int not null,
+    precio_unitario decimal(10,2) 
 ); --------------------------------------------------------------------------------
 
 

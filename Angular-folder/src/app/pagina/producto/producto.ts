@@ -1,4 +1,5 @@
 import { Component, Injectable } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CarritoService } from './../../servicios/carrito';
 import { Producto } from '../../interfaz/productoInterfaz';
 import { ExpProductos } from '../../servicios/exp-productos';
@@ -24,6 +25,7 @@ export class Productos {
   constructor(
     private carrito: CarritoService,
     private expProductos: ExpProductos,
+    private router: Router,
   ) {
     this.productos = this.expProductos.obtenerProductos();
     this.producto = this.productos[0];
@@ -59,10 +61,10 @@ export class Productos {
   seleccionarProducto(id: number): void {
     const productoSeleccionado = this.productos.find(producto => producto.id === id);
 
-    if (productoSeleccionado) {
-      this.producto = productoSeleccionado;
-      this.cantidad = 1;
+      if (productoSeleccionado) {
+        this.producto = productoSeleccionado;
+        this.cantidad = 1;
+      }
     }
-  }
 
 }

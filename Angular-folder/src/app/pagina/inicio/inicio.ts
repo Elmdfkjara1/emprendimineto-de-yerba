@@ -10,34 +10,31 @@ import { AfterViewInit } from '@angular/core';
 })
 export class Inicio implements AfterViewInit {
 
-  ngAfterViewInit(): void {
-
-    const elementos = document.querySelectorAll(
-      '.aparecer-izquierda, .aparecer-derecha'
-    );
-
-    const observer = new IntersectionObserver(
-      (entradas) => {
-
-        entradas.forEach((entrada) => {
-
-          if (entrada.isIntersecting) {
-            entrada.target.classList.add('visible');
-            observer.unobserve(entrada.target);
-          }
-
-        });
-
-      },
-      {
-        threshold: 0.2
-      }
-    );
-
-    elementos.forEach((elemento) => {
-      observer.observe(elemento);
-    });
-
+ ngAfterViewInit(): void {
+  if (typeof IntersectionObserver === 'undefined') {
+    return;
   }
 
+  const elementos = document.querySelectorAll(
+    '.aparecer-izquierda, .aparecer-derecha'
+  );
+
+  const observer = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible');
+          observer.unobserve(entrada.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2
+    }
+  );
+
+  elementos.forEach((elemento) => {
+    observer.observe(elemento);
+  });
+}
 }

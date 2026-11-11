@@ -1,54 +1,52 @@
-
 import { Injectable } from '@angular/core';
-import { Producto } from '../interfaz/productoInterfaz';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root',
-})
-export class CarritoService {
-
-  carrito: Producto[] = [];
-
-  // READ - Obtener productos del carrito
-  obtenerCarrito(): Producto[] {
-    return this.carrito;
-  }
-
-  // CREATE - Agregar producto al carrito
-  agregarAlCarrito(producto: Producto): void {
-    this.carrito.push(producto);
-    alert(`Producto agregado al carrito: ${producto.nombre}`);
-  }
-
-  // DELETE - Eliminar producto por ID
-  eliminarDelCarrito(id: number): void {
-    this.carrito = this.carrito.filter(producto => producto.id !== id);
-  }
-
-  eliminarItemDelCarrito(indice: number): void {
-    this.carrito.splice(indice, 1);
-  }
-
-  aumentarCantidad(id: number): void {
-    const producto = this.carrito.find(producto => producto.id === id);
-    if (producto) {
-      producto.cantidad = (producto.cantidad || 1) + 1;
-    }
-  }
-
-  disminuirCantidad(id: number): void {
-    const producto = this.carrito.find(producto => producto.id === id);
-    if (producto && producto.cantidad && producto.cantidad > 1) {
-      producto.cantidad -= 1;
-    }
-  }
-
-  // DELETE - Vaciar carrito
-  vaciarCarrito(): void {
-    this.carrito = [];
-    
-  }
-
+export interface ItemCarrito {
+  id: number;
+  id_producto: number;
+  nombre: string;
+  imagen: string;
+  precio: number;
+  peso: number;
+  cantidad: number;
+  subtotal: number;
 }
 
+@Injectable({ providedIn: 'root' })
+export class CarritoService {
+  private url = 'http://localhost/api_proyecto/public/carrito'; // misma base que los otros servicios
+
+  constructor(private http: HttpClient) {}
+
+  obtenerCarrito(): Observable<ItemCarrito[]> {
+    return this.http.get<any[]>(this.url).pipe(
+      // PDO devuelve números como texto: los convertimos acá
+      map(items => items.map(i => ({
+        ...i,
+        id: +i.id,
+        id_producto: +i.id_producto,
+        precio: +i.precio,
+        peso: +i.peso,
+        cantidad: +i.cantidad,
+        subtotal: +i.subtotal
+      })))
+    );
+  }
+
+  agregar(idProducto: number, cantidad = 1) {
+    return this.http.post(`${this.url}/agregar`, { id_producto: idProducto, cantidad });
+  }
+
+  actualizarCantidad(idProducto: number, cantidad: number) {
+    return this.http.put(`${this.url}/actualizar/${idProducto}`, { cantidad });
+  }
+
+  eliminar(idProducto: number) {
+    return this.http.delete(`${this.url}/eliminar/${idProducto}`);
+  }
+
+  vaciar() {
+    return this.http.delete(`${this.url}/vaciar`);
+  }
+}

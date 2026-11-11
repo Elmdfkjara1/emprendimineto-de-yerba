@@ -1,17 +1,21 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModificarProducto } from './mod-producto';
+import { ExpProductos } from '../../servicios/exp-productos';
+import { provideRouter } from '@angular/router';
 
-import { ModProducto } from './mod-producto';
-
-describe('ModProducto', () => {
-  let component: ModProducto;
-  let fixture: ComponentFixture<ModProducto>;
+describe('ModificarProducto', () => {
+  let component: ModificarProducto;
+  let fixture: ComponentFixture<ModificarProducto>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModProducto],
+      imports: [ModificarProducto],
+      providers: [ExpProductos,provideRouter([])],
+     
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModProducto);
+    fixture = TestBed.createComponent(ModificarProducto);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -13,11 +13,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contacto" (click)="menuAbierto = false">Contacto</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/pedidos-admi">Pedidos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/modificar-producto">Modificar producto</a>
+        @if (esAdmin) {
+
+  <li class="nav-item">
+    <a class="nav-link"
+       routerLink="/pedidos-admi"
+       (click)="menuAbierto = false">
+      Pedidos
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link"
+       routerLink="/modificar-producto"
+       (click)="menuAbierto = false">
+      Modificar producto
+    </a>
+  </li>
+
+}
         <li class="nav-item nav-item-carrito">
           <a class="nav-link" routerLink="/carrito" aria-label="Carrito" (click)="menuAbierto = false"> <i class="bi bi-cart"></i> </a>
         </li>

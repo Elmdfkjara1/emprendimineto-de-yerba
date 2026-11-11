@@ -5,7 +5,8 @@ import { Usuario } from '../interfaz/usuarioInterfaz';
   providedIn: 'root',
 })
 export class AuthService {
-  usuario: Usuario[] = [];
+  usuario: Usuario[] = []; // Todos los usuarios
+  usuarioActual: Usuario | null = null; // Usuario que inició sesión  
 
   obtenerUsuario(): Usuario[] {
     return this.usuario;

@@ -16,7 +16,7 @@ class Bd {
                 // localhost: servidor donde está MySQL.
                 // BDpasantias: nombre de la base de datos.
                 // utf8: permite trabajar correctamente con caracteres especiales.
-                "mysql:host=localhost;dbname=BDpasantias;charset=utf8",
+                "mysql:host=localhost;dbname=emprendimiento_yerba;charset=utf8",
                 // Usuario de MySQL.
                 "root",
                 // Contraseña de MySQL.

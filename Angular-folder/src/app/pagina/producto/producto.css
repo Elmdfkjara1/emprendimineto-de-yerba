@@ -8,7 +8,7 @@
 }
 
 .producto-seccion {
-  background: linear-gradient(180deg, var(--color-arena) 0%, #ffffff 55%);
+  background-color: #FBEEDD;
 }
 
 /* ---------- Hueco de imagen (ancho y alto definidos) ---------- */

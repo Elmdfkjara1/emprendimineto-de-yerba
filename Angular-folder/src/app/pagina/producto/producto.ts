@@ -4,6 +4,7 @@ import { Producto } from '../../interfaz/productoInterfaz';
 import { ExpProductos } from '../../servicios/exp-productos';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-producto',
   imports: [RouterLink],
@@ -13,6 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 @Injectable({
   providedIn: 'root',
+
 })
 export class Productos {
   productos: Producto[];
@@ -27,32 +29,40 @@ export class Productos {
     this.producto = this.productos[0];
   }
 
-  obtenerProductos(){
+  mensajeToast(): string {
+    return this.carrito.mensajeToast();
+  }
+
+  limpiarToast(): void {
+    this.carrito.mensajeToast.set('');
+  }
+
+  obtenerProductos() {
     const productos = this.expProductos.obtenerProductos();
     return productos;
   }
 
-    agregarAlCarrito(producto: Producto) {
-      this.carrito.agregarAlCarrito({ ...producto, cantidad: this.cantidad });
-    }
+  agregarAlCarrito(producto: Producto) {
+    this.carrito.agregarAlCarrito({ ...producto, cantidad: this.cantidad });
+  }
 
-    disminuirCantidad(): void {
-      if (this.cantidad > 1) {
-        this.cantidad--;
-      }
+  disminuirCantidad(): void {
+    if (this.cantidad > 1) {
+      this.cantidad--;
     }
+  }
 
-    aumentarCantidad(): void {
-      this.cantidad++;
+  aumentarCantidad(): void {
+    this.cantidad++;
+  }
+
+  seleccionarProducto(id: number): void {
+    const productoSeleccionado = this.productos.find(producto => producto.id === id);
+
+    if (productoSeleccionado) {
+      this.producto = productoSeleccionado;
+      this.cantidad = 1;
     }
-
-    seleccionarProducto(id: number): void {
-      const productoSeleccionado = this.productos.find(producto => producto.id === id);
-
-      if (productoSeleccionado) {
-        this.producto = productoSeleccionado;
-        this.cantidad = 1;
-      }
-    }
+  }
 
 }

@@ -5,7 +5,7 @@
   --marron: #725530;
   --marron-rojizo: #772F13;
 
-  background: linear-gradient(180deg, var(--color-arena) 0%, #ffffff 65%);
+  background-color: #FBEEDD;;
 
   display: flex;             
   flex-wrap: wrap;           /* si no entran, la segunda baja (celular) */

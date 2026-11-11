@@ -58,8 +58,6 @@
           </div>
         </div>
 
-
-        <!-- CTA -->
         <div class="d-grid d-sm-flex gap-3">
           <button type="button" class="btn-comprar flex-sm-fill" (click)="agregarAlCarrito(producto)">
             Agregar al carrito
@@ -69,7 +67,24 @@
           </button>
         </div>
       </div>
-
     </div>
   </div>
+
+  <!-- Toast de confirmación -->
+  @if (mensajeToast()) {
+    <div class="toast show position-fixed bottom-0 end-0 m-3" role="alert" style="z-index: 1055;">
+      <div class="toast-header">
+        <strong class="me-auto text-success">¡Correcto!</strong>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="limpiarToast()">
+        </button>
+      </div>
+
+      <div class="toast-body">
+        {{ mensajeToast() }}
+      </div>
+    </div>
+  }
 </section>

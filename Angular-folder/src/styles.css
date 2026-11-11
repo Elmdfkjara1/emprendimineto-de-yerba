@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap');
+@font-face {
+  font-family: 'Hello Paris';
+  src: url('/assets/fuentes/HelloParisSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Fuente general */
+body {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Fuente para títulos */
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Hello Paris', sans-serif;
+  font-weight: 600;
+}

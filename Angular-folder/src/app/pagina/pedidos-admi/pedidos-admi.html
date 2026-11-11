@@ -1,29 +1,33 @@
-<h2>Pedidos</h2>
+<section class="pedidos-page">
+  <h2>Pedidos</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Comprador</th>
-      <th>Dirección</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Precio</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    @for (pedido of pedidos; track $index) {
-
-      @for (producto of pedido.productos; track $index) {
+  <div class="pedidos-table-wrapper" role="region" aria-label="Listado de pedidos" tabindex="0">
+    <table>
+      <thead>
         <tr>
-          <td>{{ pedido.nombre }} {{ pedido.apellido }}</td>
-          <td>{{ pedido.direccion }}</td>
-          <td>{{ producto.nombre }}</td>
-          <td>{{ producto.cantidad }}</td>
-          <td>${{ producto.precio }}</td>
+          <th scope="col">Comprador</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
         </tr>
-      }
+      </thead>
 
-    }
-  </tbody>
-</table>
+      <tbody>
+        @for (pedido of pedidos; track $index) {
+
+          @for (producto of pedido.productos; track $index) {
+            <tr>
+              <td>{{ pedido.nombre }} {{ pedido.apellido }}</td>
+              <td>{{ pedido.direccion }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ producto.cantidad }}</td>
+              <td>${{ producto.precio }}</td>
+            </tr>
+          }
+
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

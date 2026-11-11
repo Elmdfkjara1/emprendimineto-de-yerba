@@ -1,81 +1,69 @@
-/* ===== Footer Ojas ===== */
-
 .footer-ojas {
   background-color: #c8bf9d;
   color: #3d3d2f;
-  padding: 40px clamp(20px, 5vw, 60px) 20px;
+  padding: 24px clamp(16px, 4vw, 48px) 12px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* Fila: marca | preguntas frecuentes | navegación + redes */
 .footer-ojas-content {
   display: grid;
-  grid-template-columns: minmax(0, 200px) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(120px, 150px) minmax(250px, 1fr) minmax(0, 1.8fr);
   align-items: start;
-  gap: 48px;
+  gap: 28px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
 }
 
-.footer-ojas-navigation {
-  display: flex;
-  gap: 60px;
-}
-
-/* Marca */
 .footer-ojas-branding {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .footer-ojas-logo-img {
-  width: 180px;
-  height: 180px;
+  width: 88px;
+  height: 88px;
   object-fit: contain;
   border-radius: 12px;
 }
 
-.footer-ojas-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #3d3d2f;
-  text-decoration: none;
-}
-
 .footer-ojas-tagline {
-  font-size: 0.8rem;
+  margin: 6px 0 0;
+  font-size: 0.75rem;
   color: #55523f;
-  margin-top: 8px;
 }
 
-/* Títulos de columna */
+.footer-ojas-navigation {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
 .footer-ojas-titulo {
+  margin: 0 0 8px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  font-size: 0.75rem;
   font-weight: 700;
-  margin-bottom: 12px;
 }
 
-/* Links */
 .footer-ojas-links,
-.footer-ojas-redes {
+.footer-ojas-contact-links {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .footer-ojas-links li {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .footer-ojas-links a {
   color: #3d3d2f;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   transition: opacity 0.2s ease;
 }
 
@@ -83,59 +71,62 @@
   opacity: 0.6;
 }
 
-/* Redes */
-.footer-ojas-redes {
+.footer-ojas-contact-links {
   display: flex;
-  gap: 12px;
-  margin-left: -8px; /* alinea el primer ícono con el título "Redes" */
+  flex-direction: column;
+  gap: 8px;
 }
 
-.footer-ojas-redes a {
-  color: #3d3d2f;
-  font-size: 1.2rem;
+.footer-ojas-contact-links a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
+  gap: 8px;
+  color: #3d3d2f;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
-.footer-ojas-redes a:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.footer-ojas-contact-links a:hover {
+  opacity: 0.65;
 }
 
-/* ===== Preguntas frecuentes (una debajo de otra) ===== */
+.footer-ojas a:focus-visible,
+.faq-container summary:focus-visible {
+  outline: 2px solid #3d3d2f;
+  outline-offset: 3px;
+}
 
 .faq-container {
-  min-width: 0; /* el texto no estira la columna */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  min-width: 0;
+}
+
+.faq-container > .footer-ojas-titulo {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
 }
 
 .faq-container details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 52px;
-  padding: 8px 0;
+  min-width: 0;
+  padding: 4px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  width: 100%;
-  max-width: 100%;
 }
 
 .faq-container summary {
-  cursor: pointer;
-  min-height: 32px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  line-height: 1.35;
+  gap: 8px;
+  min-height: 28px;
   padding: 2px 0;
-  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .faq-container summary::-webkit-details-marker {
@@ -144,9 +135,9 @@
 
 .faq-container summary::after {
   content: "+";
-  font-size: 1.1rem;
-  line-height: 1;
   flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .faq-container details[open] summary::after {
@@ -154,79 +145,81 @@
 }
 
 .faq-container details p {
-  margin: 8px 0 0;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  margin: 6px 0 2px;
   color: #55523f;
-  width: 100%;
-  max-width: 100%;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
-
-/* ===== Copyright ===== */
 
 .footer-ojas-bottom {
   max-width: 1200px;
-  margin: 30px auto 0;
+  margin: 16px auto 0;
+  padding-top: 8px;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
-  padding-top: 15px;
-  text-align: center;
-  font-size: 0.75rem;
   color: #55523f;
+  text-align: center;
+  font-size: 0.7rem;
 }
 
 .footer-ojas-bottom p {
   margin: 0;
 }
 
-/* ===== Responsive ===== */
-
-/* Tablet: marca y navegación arriba, FAQ a todo el ancho debajo */
 @media (max-width: 991px) {
   .footer-ojas-content {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 20px;
   }
 
   .faq-container {
     grid-column: 1 / -1;
-    order: 3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 20px;
   }
 }
 
-/* Celular: todo apilado */
 @media (max-width: 767px) {
-  .footer-ojas-content {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 32px;
+  .footer-ojas {
+    padding: 18px 16px 10px;
   }
 
-  .footer-ojas-branding {
-    justify-content: center;
+  .footer-ojas-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .footer-ojas-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-ojas-logo-img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .footer-ojas-tagline {
+    margin: 0;
   }
 
   .footer-ojas-navigation {
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .footer-ojas-links {
-    display: grid;
-    gap: 8px;
-  }
-
-  .footer-ojas-redes {
-    justify-content: center;
-    margin-left: 0;
+    gap: 16px;
   }
 
   .faq-container {
-    width: 100%;
-    text-align: left;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
   }
 
-  .faq-container .footer-ojas-titulo {
-    text-align: center;
+  .footer-ojas-bottom {
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .faq-container {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
